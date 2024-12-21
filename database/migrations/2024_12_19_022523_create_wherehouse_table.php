@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wherehouse', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
+            $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
             $table->timestamps();
         });
     }

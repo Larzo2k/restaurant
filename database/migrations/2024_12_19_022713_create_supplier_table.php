@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('supplier', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('address');
             $table->string('email');
             $table->string('cod');
             $table->string('phone');
-            $table->string('image');
+            $table->string('image')->default('');
+            $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
             $table->timestamps();
         });
     }

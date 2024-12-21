@@ -34,7 +34,7 @@
                 <div class="d-flex flex-center flex-column flex-lg-row-fluid">
                     <div class="w-lg-500px p-10">
 
-                        <form class="form w-100" action="#" method="POST">
+                        <form class="form w-100" action="{{ route('auth') }}" method="POST">
                             @csrf
                             <div class="text-center mb-11">
                                 <h1 class="text-dark fw-bolder mb-3">

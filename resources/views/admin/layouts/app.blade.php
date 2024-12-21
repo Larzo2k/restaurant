@@ -3,11 +3,11 @@
 <html lang="es">
 <head>
     <base href="/">
-    @if ($configuracion->nombre!=="")
+    {{-- @if ($configuracion->nombre!=="")
         <title>{{$configuracion->nombre}}</title>
-    @else
+    @else --}}
         <title>Codominio Onix</title>
-    @endif
+    {{-- @endif --}}
     <meta charset="utf-8" />
     <meta name="description"
         content="Sistema de gestion de condominios" />
@@ -15,7 +15,7 @@
         content="Sistema de gestion de condominios" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:image" content="{{asset($configuracion->logotipo)}}">
+    {{-- <meta property="og:image" content="{{asset($configuracion->logotipo)}}"> --}}
     <meta property="og:type" content="website" />
     <meta property="og:title"
         content="Sistema de gestion de condominios" />
@@ -79,11 +79,11 @@
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                             <a href="{{route('index')}}" class="d-lg-none">
-                                @if ($configuracion->logotipo!=="")
+                                {{-- @if ($configuracion->logotipo!=="")
                                     <img alt="Logo" src="{{$configuracion->logotipo}}" class="h-30px" />
-                                @else
+                                @else --}}
                                     <img alt="Logo" src="/metronic/assets/media/logos/logo-2.svg" class="h-30px" />
-                                @endif
+                                {{-- @endif --}}
                             </a>
                         </div>
                         <!--end::Mobile logo-->
@@ -112,17 +112,6 @@
                             <!--begin::Toolbar wrapper-->
                             <div class="d-flex align-items-stretch flex-shrink-0">
 
-                                <div class="d-flex align-items-center ms-1 ms-lg-3" style="width: 200px !important;">
-                                    <select class="form-select form-select-sm" id="idcondominio_header" name="idcondominio_header"
-                                    data-control="select2" data-placeholder="Seleccione un condominio"
-                                    style="width: 100% !important;">
-                                        <option value=""></option>
-                                        @foreach($condominios as $item)
-                                            <option value="{{$item->id}}" id="option{{$item->id}}" {{ Auth::user()->condominio_seleccionado == $item->id?"selected":"" }}>{{$item->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 <!--begin::User menu-->
                                 <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                                     <!--begin::Menu wrapper-->
@@ -130,11 +119,11 @@
                                         data-kt-menu-trigger="click" data-kt-menu-attach="parent"
                                         data-kt-menu-placement="bottom-end">
                                         <!--<img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />-->
-                                            @if (auth()->user()->imagen=="")
+                                            {{-- @if (auth()->user()->imagen=="") --}}
                                                 <img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />  
-                                            @else
+                                            {{-- @else
                                                 <img src="{{asset(auth()->user()->imagen)}}" alt="user" />
-                                            @endif
+                                            @endif --}}
                                     </div>
                                     <!--begin::User account menu-->
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
@@ -144,21 +133,21 @@
                                             <div class="menu-content d-flex align-items-center px-3">
                                                 <!--begin::Avatar-->
                                                 <div class="symbol symbol-50px me-5">
-                                                     @if (auth()->user()->imagen=="")
+                                                     {{-- @if (auth()->user()->imagen=="") --}}
                                                         <img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />  
-                                                    @else
+                                                    {{-- @else
                                                         <img src="{{asset(auth()->user()->imagen)}}" alt="user" />
-                                                    @endif
+                                                    @endif --}}
                                                 </div>
                                                 <!--end::Avatar-->
                                                 <!--begin::Username-->
                                                 <div class="d-flex flex-column">
-                                                    <div class="fw-bolder d-flex align-items-center fs-5">{{getFirstSubstring(auth()->user()->name)}}
-                                                        {{-- <span
-                                                            class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span> --}}
+                                                    <div class="fw-bolder d-flex align-items-center fs-5">
+                                                        <span
+                                                            class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span>
                                                     </div>
-                                                    <a href="{{route('acount')}}"
-                                                        class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
+                                                    <a href="#"
+                                                        class="fw-bold text-muted text-hover-primary fs-7">marck</a>
                                                 </div>
                                                 <!--end::Username-->
                                             </div>
@@ -169,7 +158,7 @@
                                         <!--end::Menu separator-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="{{route('acount')}}" class="menu-link px-5">My Profile</a>
+                                            <a href="#" class="menu-link px-5">My Profile</a>
                                         </div>
                                         <!--end::Menu item-->
 
@@ -181,7 +170,7 @@
 
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="{{ url('admin/logout') }}" class="menu-link px-5">Log out</a>
+                                            <a href="{{route('logout')}}" class="menu-link px-5">Log out</a>
                                         </div>
                                         <!--end::Menu item-->
 
@@ -221,15 +210,15 @@
                         <!--begin::Copyright-->
                         <div class="text-dark order-2 order-md-1">
                             <span class="text-muted fw-bold me-1">{{ date('Y') }}©</span>
-                            @if ($configuracion->nombre !== "")
+                            {{-- @if ($configuracion->nombre !== "")
                             <a href="https://www.facebook.com/p/Alves-Administraci%C3%B3n-E-Inversiones-SRL-100063593889714/" target="_blank" class="text-gray-800 text-hover-primary">
                                 {{$configuracion->nombre}}
                             </a>
-                        @else
+                        @else --}}
                             <a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">
                                 Nombre de la Empresa
                             </a>
-                        @endif
+                        {{-- @endif --}}
                         </div>
                         <!--end::Copyright-->
                         <!--begin::Menu-->
