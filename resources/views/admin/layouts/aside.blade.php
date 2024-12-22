@@ -109,6 +109,14 @@
                         <span class="menu-title">Configuración</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('clientes') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">Clientes</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>

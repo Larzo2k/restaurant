@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\ConfiguracionController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,10 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::get('configuration', [ConfiguracionController::class, 'index'])->name('configuration');
     Route::post('configuration/update', [ConfiguracionController::class, 'update'])->name('configuration.update');
+    Route::get('clientes', [ClienteController::class, 'index'])->name('clientes');
+    Route::group(['prefix'=>'cliente'], function(){
+        Route::post('store', [ClienteController::class, 'store'])->name('clientes.store');
+        Route::post('update/{id}', [ClienteController::class, 'update'])->name('clientes.update');
+        Route::post('delete/{id}', [ClienteController::class, 'delete'])->name('clientes.delete');
+    });
 });
