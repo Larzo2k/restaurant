@@ -8,7 +8,7 @@
             <h3 class="card-title"> <a href="#" class="btn btn-sm btn-icon btn-light-success me-2" data-bs-toggle="tooltip"
                     data-bs-boundary="window" data-bs-placement="top" title="" data-bs-original-title="Atras"
                     aria-label="Atras"><i class="fa fa-arrow-left"></i></a>
-                Lista de clientes </h3>
+                Lista de almacenes </h3>
             <div class="card-toolbar d-flex justify-content-end align-items-center">
                 <div class="d-flex align-items-center position-relative my-1 me-4">
                     <span class="svg-icon svg-icon-1 position-absolute ms-4">
@@ -28,7 +28,7 @@
         </div>
         <div class="card-body">
             <div class="" id="table">
-                @include('admin.cliente.table')
+                @include('admin.almacen.table')
             </div>
         </div>
         <!--end::Card body-->
@@ -37,8 +37,8 @@
 @endsection
 
 @section('modals')
-    @include('admin.cliente.modal.create')
-    @include('admin.cliente.modal.edit')
+    @include('admin.almacen.modal.create')
+    @include('admin.almacen.modal.edit')
 @endsection
 
 
@@ -48,10 +48,10 @@
         $(document).ready(function() {
           console.log("Script cargado correctamente.");
           //guardar directivos
-          $('#clienteForm').submit(function(e) {
+          $('#almacenForm').submit(function(e) {
               e.preventDefault();
 
-              let form = document.getElementById('clienteForm');
+              let form = document.getElementById('almacenForm');
               if (!form.checkValidity()) {
                   form.reportValidity();
                   return;
@@ -60,7 +60,7 @@
               let formData = new FormData(form);
 
               $.ajax({
-                  url: "{{ url('admin/cliente/store') }}",
+                  url: "{{ url('admin/almacen/store') }}",
                   type: 'POST',
                   data: formData,
                   processData: false,
@@ -93,10 +93,10 @@
           });
 
           //editar directivo
-          $('#clienteFormEditar').submit(function(e) {
+          $('#almacenFormEditar').submit(function(e) {
               e.preventDefault();
 
-              let form = document.getElementById('clienteFormEditar');
+              let form = document.getElementById('almacenFormEditar');
               if (!form.checkValidity()) {
                   form.reportValidity();
                   return;
@@ -105,7 +105,7 @@
               let formData = new FormData(form);
               let id = $('#clienteFormEditar input[name="id"').val();
               $.ajax({
-                  url: "{{ url('admin/cliente/update') }}/"+id,
+                  url: "{{ url('admin/almacen/update') }}/"+id,
                   type: 'POST',
                   data: formData,
                   processData: false,
@@ -143,7 +143,7 @@
                   page = 1;
                   currentRequestAjax = $.ajax({
                       type: "GET",
-                      url: "{{ url('admin/clientes') }}" + '?page=' + page,
+                      url: "{{ url('admin/almacen') }}" + '?page=' + page,
                       data: {
                           buscador: $('#buscador').val(),
                       },
@@ -163,28 +163,15 @@
 
           });
         })
-        function editar(id, name, address, email, cod, phone, image) {
-          $('#clienteFormEditar input[name="id"]').val(id);
-          $('#clienteFormEditar input[name="nombre"]').val(name);
-          $('#clienteFormEditar input[name="apellido"]').val(address);
-          $('#clienteFormEditar input[name="email"]').val(email);
-          $('#clienteFormEditar select[name="cod_pais"]').val(cod).change();
-          $('#clienteFormEditar input[name="telefono"]').val(phone);
-          if (image != null && image!='') {
-            console.log(image);
-              $('#file-upload-image2').attr('src', `{{ asset('`+image+`') }}`);
-              $('#image-upload-wrap2').hide();
-              $('#file-upload-content2').show();
-          } else{
-              $('#image-upload-wrap2').show();
-              $('#file-upload-content2').hide();
-          }
+        function editar(id, name) {
+          $('#almacenFormEditar input[name="id"]').val(id);
+          $('#almacenFormEditar input[name="nombre"]').val(name);
           $('#editarModalCiudad').modal('show');
         }
-        function eliminar(id, nombre, apellido) {
+        function eliminar(id, nombre) {
           Swal.fire({
                 title: '¿Estás seguro?',
-                html: `Esta acción dara de baja al directivo: <b>${nombre} ${apellido}</b>`,
+                html: `Esta acción dara de baja al directivo: <b>${nombre}</b>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Dar de baja',
@@ -192,7 +179,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url:`{{url('admin/cliente/delete')}}/`+id,
+                        url:`{{url('admin/almacen/delete')}}/`+id,
                         type: "POST",
                         data:{
                             id_directivo: id,

@@ -117,6 +117,30 @@
                         <span class="menu-title">Clientes</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('proveedor') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">Proveedor</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('categorias') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">categorias</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('almacen') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">Almacen</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>

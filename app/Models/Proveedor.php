@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class Cliente extends Model
+class Proveedor extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
@@ -17,7 +17,7 @@ class Cliente extends Model
     public $incrementing = false;
 
     protected $keyType = 'string';
-     protected $table = 'customer';
+     protected $table = 'supplier';
     public $timestamps = true;
     protected $fillable = [
         'id',
@@ -48,10 +48,10 @@ class Cliente extends Model
         return self::listadoGeneral($request);
     }
     public static function listarView(Request $request = null){
-        $clientes = self::listadoGeneral($request);
+        $proveedores = self::listadoGeneral($request);
         $json_paises = File::get(base_path() . '/database/data/paises.json');
         $paises = json_decode($json_paises);
-        $view = view('admin.cliente.table', compact('clientes', 'paises'))->render();
+        $view = view('admin.proveedor.table', compact('proveedores', 'paises'))->render();
         return $view;
     }
     public static function storeCliente($name, $apellido, $email, $cod_pais, $telefono, $imagen, $status = self::ESTADO_ACTIVO){

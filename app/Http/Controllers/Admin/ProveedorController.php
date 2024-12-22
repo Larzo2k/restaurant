@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cliente;
+use App\Models\Proveedor;
 use App\Utils\Helpers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class ProveedorController extends Controller
 {
     public function index(Request $request)
     {
-        $clientes = Cliente::listaConPaginate();
+        $proveedores = Proveedor::listaConPaginate();
         if($request->ajax()){
-            $view = Cliente::listarView($request);
+            $view = Proveedor::listarView($request);
             return response()->json([
                 'codigo' => 0,
                 'mensaje' => 'directivo listado exitosamente',
@@ -23,16 +23,16 @@ class ClienteController extends Controller
         }
         $json_paises = File::get(base_path() . '/database/data/paises.json');
         $paises = json_decode($json_paises);
-        return view('admin.cliente.index', compact('clientes','paises'));
+        return view('admin.proveedor.index', compact('proveedores','paises'));
     }
     public function store(Request $request)
     {
         try{
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Cliente::storeCliente($request->nombre, $request->apellido, $request->email, $request->cod_pais, $request->telefono, $ruta);
+            Proveedor::storeCliente($request->nombre, $request->apellido, $request->email, $request->cod_pais, $request->telefono, $ruta);
             return response()->json([
                 'codigo' => 0,
-                'data' => Cliente::listarView(),
+                'data' => Proveedor::listarView(),
                 'mensaje' => 'Cliente creado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
@@ -42,11 +42,15 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         try{
+            // dd([
+            //     'request' => $request->all(),
+            //     'id' => $id
+            // ]);
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Cliente::updateCliente($id, $request->nombre, $request->apellido, $request->email, $request->cod_pais, $request->telefono, $ruta);
+            Proveedor::updateCliente($request->id, $request->nombre, $request->apellido, $request->email, $request->cod_pais, $request->telefono, $ruta);
             return response()->json([
                 'codigo' => 0,
-                'data' => Cliente::listarView(),
+                'data' => Proveedor::listarView(),
                 'mensaje' => 'Cliente actualizado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
@@ -55,10 +59,10 @@ class ClienteController extends Controller
     }
     public function delete($id){
         try{
-            $cliente = Cliente::deleteCliente($id);
+            $cliente = Proveedor::deleteCliente($id);
             return response()->json([
                 'codigo' => 0,
-                'data' => Cliente::listarView(),
+                'data' => Proveedor::listarView(),
                 'mensaje' => 'Cliente eliminado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
