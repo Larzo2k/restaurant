@@ -36,10 +36,6 @@ class AlmacenController extends Controller
     }
     public function update(Request $request, $id)
     {
-        // dd([
-        //     'id' => $id,
-        //     'request' => $request->all()
-        // ]);
         try{
             Almacen::updateAlmacen($request->id, $request->nombre);
             return response()->json([

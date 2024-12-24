@@ -19,3 +19,4 @@
 <script src="https://kit.fontawesome.com/e2c73ec39d.js" crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script><!--CK EDITOR-->
 @stack('styles')
+@stack('javascripts')

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\ConfiguracionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\ProveedorController;
 use Illuminate\Support\Facades\Route;
 use PSpell\Config;
@@ -56,4 +57,11 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
         Route::post('update/{id}', [AlmacenController::class, 'update'])->name('almacen.update');
         Route::post('delete/{id}', [AlmacenController::class, 'delete'])->name('almacen.delete');
     });
+    Route::get('producto', [ProductoController::class, 'index'])->name('productos');
+    Route::group(['prefix'=>'producto'], function(){
+        Route::post('store', [ProductoController::class, 'store'])->name('producto.store');
+        Route::post('update/{id}', [ProductoController::class, 'update'])->name('producto.update');
+        Route::post('delete/{id}', [ProductoController::class, 'delete'])->name('producto.delete');
+    });
+
 });

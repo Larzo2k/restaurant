@@ -141,6 +141,14 @@
                         <span class="menu-title">Almacen</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('productos') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">Productos</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>
