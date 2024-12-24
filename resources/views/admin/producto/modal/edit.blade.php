@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCrearCiudades">Agregar productos</h5>
+                <h5 class="modal-title" id="exampleModalCrearCiudades">Editar producto</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="productoFormEditar" enctype="multipart/form-data">
@@ -15,26 +15,53 @@
                             <input type="text" class="form-control form-control-sm " id="nombre" name="nombre" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="apellido" class="form-label">Apellido<span class="required"></span></label>
-                            <input type="text" class="form-control form-control-sm " id="apellido" name="apellido" required>
+                            <label for="apellido" class="form-label">Código<span class="required"></span></label>
+                            <input type="number" class="form-control form-control-sm " id="codigo" name="codigo" required>
                         </div>
-                        {{-- <div class="col-md-6 mb-3">
-                            <label for="cod_pais" class="form-label">Código de país<span class="required"></span></label>
-                            <select class="form-select form-select-sm" data-control="select2" data-placeholder="Seleccione un pais" name="cod_pais" required>
+                        <div class="col-md-6 mb-3">
+                            <label for="descripcion" class="form-label">Descripción<span class="required"></span></label>
+                            <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" required></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="almacen_id" class="form-label">Almacen<span class="required"></span></label>
+                            <select class="form-select form-select-sm" data-control="select2" data-placeholder="Seleccione un almacen" name="almacen_id" required>
                                 <option value=""></option>
-                                @forelse ($paises as $pais)
-                                    <option value="{{ $pais->dial_code }}"> {{ $pais->name }}</option>
+                                @forelse ($almacenes as $almacen)
+                                    <option value="{{ $almacen->id }}"> {{ $almacen->name }}</option>
                                 @empty
                                 @endforelse
                             </select>
-                        </div> --}}
-                        <div class="col-md-6 mb-3">
-                            <label for="correo" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control form-control-sm" name="telefono">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="apellido" class="form-label">Correo<span class="required"></span></label>
-                            <input type="email" class="form-control form-control-sm " id="email" name="email" required>
+                            <label for="categoria_id" class="form-label">Categoría<span class="required"></span></label>
+                            <select class="form-select form-select-sm" data-control="select2" data-placeholder="Seleccione una categoría" name="categoria_id" required>
+                                <option value=""></option>
+                                @forelse ($categorias as $categoria)
+                                    <option value="{{ $categoria->id }}"> {{ $categoria->name }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="precio" class="form-label">Precio<span class="required"></span></label>
+                            <input type="number" class="form-control form-control-sm" name="precio" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="stock" class="form-label">Stock<span class="required"></span></label>
+                            <input type="number" class="form-control form-control-sm " id="stock" name="stock" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="stock" class="form-label">Código de barra <span class="required"></span></label>
+                            <div class="d-flex justify-content-center">
+                                <!-- Contenedor para el código de barras -->
+                                {{-- <svg id="barcode" style="border: 1px solid #ddd; padding: 10px;"></svg> --}}
+                                 <img id="barcodeImageEdit" src="" alt="Código de barras" style="display:none;">
+                            </div>
+                        </div>
+
+                        <!-- Botón para generar el código de barras -->
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="button" class="btn btn-primary" onclick="generateBarcode()">Generar Código de Barra</button>
                         </div>
                         <div class="col-md-12 mb-5">
                             <label class="form-label">Imagen</label>
@@ -47,7 +74,7 @@
                             <div class="file-upload-content" id="file-upload-content2">
                                 <img class="file-upload-image" id="file-upload-image2" alt="imagen" />
                                 <div class="image-title-wrap" id="image-title-wrap2">
-                                    <button type="button" onclick="removeUpload('2')" class="remove-image" id="remove-image1">Eliminar</button>
+                                    <button type="button" onclick="removeUpload('2')" class="remove-image" id="remove-image2">Eliminar</button>
                                 </div>
                             </div>
                         </div>

@@ -62,6 +62,8 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
         Route::post('store', [ProductoController::class, 'store'])->name('producto.store');
         Route::post('update/{id}', [ProductoController::class, 'update'])->name('producto.update');
         Route::post('delete/{id}', [ProductoController::class, 'delete'])->name('producto.delete');
+        Route::get('barcode', [ProductoController::class, 'getCodigo'])->name('producto.getCodigo');
+        Route::get('verify-code', [ProductoController::class, 'verifyCode'])->name('producto.verifyCode');
     });
 
 });

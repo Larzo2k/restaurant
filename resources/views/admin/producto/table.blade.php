@@ -9,14 +9,15 @@
                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                         <th class="sorting_disabled" >#</th>
                         <th class="sorting_disabled" rowspan="1" colspan="1">Imagen</th>
+                        <th class="sorting_disabled" rowspan="1" colspan="1">Codigo barra</th>
                         <th class="sorting_disabled" rowspan="1" colspan="1">
                             Nombre</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1">
-                            Apellidos</th>
+                            Descripción</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1">
-                            email</th>
+                            precio</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1">
-                            telefono</th>
+                            stock</th>
                         <th class="min-w-70px text-end sorting_disabled" rowspan="1" colspan="1">Opciones</th>
                     </tr>
                 </thead>
@@ -29,13 +30,16 @@
                             <td class="col-1">
                                 <img src="{{asset($producto->image)}}" height="40" alt="">
                             </td>
+                            <td class="col-1">
+                                <img src="{{asset($producto->getCidogoBarraPng())}}" height="30" width="50" alt="">
+                            </td>
                             <td>{{ $producto->name }}</td>
-                            <td>{{ $producto->address }}</td>
-                            <td>{{ $producto->email }}</td>
-                            <td>{{ $producto->cod }} {{ $producto->phone }}</td>
+                            <td>{{ $producto->description }}</td>
+                            <td>{{ $producto->price }}</td>
+                            <td>{{ $producto->stock }}</td>
                             <td class="text-end">
                                 {{-- @can('editar directivos') --}}
-                                    <a onclick="editar(`{{$producto->id}}`,`{{$producto->name}}`, `{{$producto->address}}`, `{{$producto->email}}`, `{{$producto->cod}}`, `{{$producto->phone}}`, `{{$producto->image}}`)"
+                                    <a onclick="editar(`{{$producto->id}}`,`{{$producto->name}}`, `{{$producto->description}}`, `{{$producto->image}}`, `{{$producto->price}}`, `{{$producto->stock}}`, `{{$producto->cod}}`, `{{$producto->category_id}}`, `{{$producto->wherehouse_id}}`)"
                                     class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
                                     data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
                                     data-bs-original-title="Editar">

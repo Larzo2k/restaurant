@@ -8,7 +8,7 @@
             <h3 class="card-title"> <a href="#" class="btn btn-sm btn-icon btn-light-success me-2" data-bs-toggle="tooltip"
                     data-bs-boundary="window" data-bs-placement="top" title="" data-bs-original-title="Atras"
                     aria-label="Atras"><i class="fa fa-arrow-left"></i></a>
-                Lista de Productos </h3>
+                Lista de productos </h3>
             <div class="card-toolbar d-flex justify-content-end align-items-center">
                 <div class="d-flex align-items-center position-relative my-1 me-4">
                     <span class="svg-icon svg-icon-1 position-absolute ms-4">
@@ -44,10 +44,8 @@
 
 @push('scripts')
     <script>
-      console.log("Script cargado correctamente."); 
       let currentRequestAjax = null;   
         $(document).ready(function() {
-          alert('hola');
           console.log("Script cargado correctamente.");
           //guardar directivos
           $('#productoForm').submit(function(e) {
@@ -145,7 +143,7 @@
                   page = 1;
                   currentRequestAjax = $.ajax({
                       type: "GET",
-                      url: "{{ url('admin/proveedor') }}" + '?page=' + page,
+                      url: "{{ url('admin/almacen') }}" + '?page=' + page,
                       data: {
                           buscador: $('#buscador').val(),
                       },
@@ -165,13 +163,15 @@
 
           });
         })
-        function editar(id, name, address, email, cod, phone, image) {
-          $('#proveedorFormEditar input[name="id"]').val(id);
-          $('#proveedorFormEditar input[name="nombre"]').val(name);
-          $('#proveedorFormEditar input[name="apellido"]').val(address);
-          $('#proveedorFormEditar input[name="email"]').val(email);
-          $('#proveedorFormEditar select[name="cod_pais"]').val(cod).change();
-          $('#proveedorFormEditar input[name="telefono"]').val(phone);
+        function editar(id, name, descripcion, image, precio, stock, codigo,category_id, wherehouse_id) {
+          $('#productoFormEditar input[name="id"]').val(id);
+          $('#productoFormEditar input[name="nombre"]').val(name);
+          $('#productoFormEditar textarea[name="descripcion"]').val(descripcion);
+          $('#productoFormEditar input[name="precio"]').val(precio);
+          $('#productoFormEditar input[name="stock"]').val(stock);
+          $('#productoFormEditar input[name="codigo"]').val(codigo);
+          $('#productoFormEditar select[name="almacen_id"]').val(wherehouse_id).change();
+          $('#productoFormEditar select[name="categoria_id"]').val(category_id).change();
           if (image != null && image!='') {
             console.log(image);
               $('#file-upload-image2').attr('src', `{{ asset('`+image+`') }}`);
@@ -181,12 +181,13 @@
               $('#image-upload-wrap2').show();
               $('#file-upload-content2').hide();
           }
+          mostrarCodigoBarcode(codigo)
           $('#editarModalCiudad').modal('show');
         }
-        function eliminar(id, nombre, apellido) {
+        function eliminar(id, nombre) {
           Swal.fire({
                 title: '¿Estás seguro?',
-                html: `Esta acción dara de baja al directivo: <b>${nombre} ${apellido}</b>`,
+                html: `Esta acción dara de baja al directivo: <b>${nombre}</b>`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Dar de baja',
@@ -194,7 +195,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url:`{{url('admin/proveedor/delete')}}/`+id,
+                        url:`{{url('admin/producto/delete')}}/`+id,
                         type: "POST",
                         data:{
                             id_directivo: id,
@@ -218,6 +219,99 @@
 
                         }
                     });
+                }
+            });
+        }
+        function generateBarcode(){
+            const codigo = $('#productoForm input[name="codigo"]').val();
+            if(codigo != ""){
+                // Primero verificamos si el código ya existe
+                verifiCode(codigo, function(existe) {
+                    if(existe) {
+                        // Si el código existe, mostramos un mensaje de error
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'El código ya existe. No se puede generar el código de barras.',
+                        });
+                    } else {
+                        // Si el código no existe, procedemos a generar el código de barras
+                        $.ajax({
+                            url: `{{url('admin/producto/barcode')}}`,
+                            type: "GET",
+                            data: {
+                                codigo: codigo,
+                                _token: "{{csrf_token()}}",
+                            },
+                            success: function(response){
+                                if(response.codigo == 0){
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: response.mensaje,
+                                    });
+                                    $('#barcodeImage').attr('src', 'data:image/png;base64,' + response.barcode).show();
+                                    $('#barcodeInput').val(response.barcode);
+                                } else {
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: response.mensaje,
+                                    });
+                                }
+                            },
+                            error: function(err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+            } else {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Ingrese un código',
+                });
+            }
+        }
+        function mostrarCodigoBarcode(codigo){
+          $.ajax({
+                            url: `{{url('admin/producto/barcode')}}`,
+                            type: "GET",
+                            data: {
+                                codigo: codigo,
+                                _token: "{{csrf_token()}}",
+                            },
+                            success: function(response){
+                                if(response.codigo == 0){
+                                    $('#barcodeImageEdit').attr('src', 'data:image/png;base64,' + response.barcode).show();
+                                } else {
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: response.mensaje,
+                                    });
+                                }
+                            },
+                            error: function(err) {
+                                console.log(err);
+                            }
+                        });
+        }
+        function verifiCode(codigo, callback){
+            $.ajax({
+                url: `{{url('admin/producto/verify-code')}}`,
+                type: "GET",
+                data: {
+                    codigo: codigo, // Se pasa el código a verificar
+                    _token: "{{csrf_token()}}",
+                },
+                success: function(response) {
+                    // Verificamos si el código existe o no en la base de datos
+                    if(response.codigo == 0){
+                        callback(false); // Código no existe
+                    } else {
+                        callback(true); // Código ya existe
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                    callback(false); // En caso de error, asumimos que no existe
                 }
             });
         }
