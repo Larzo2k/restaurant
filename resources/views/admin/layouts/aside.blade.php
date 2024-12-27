@@ -149,6 +149,22 @@
                         <span class="menu-title">Productos</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('compras') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">Compra</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('ventas') }}">
+                        <span class="menu-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </span>
+                        <span class="menu-title">Venta</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>

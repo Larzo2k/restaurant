@@ -143,7 +143,7 @@
                   page = 1;
                   currentRequestAjax = $.ajax({
                       type: "GET",
-                      url: "{{ url('admin/almacen') }}" + '?page=' + page,
+                      url: "{{ url('admin/producto') }}" + '?page=' + page,
                       data: {
                           buscador: $('#buscador').val(),
                       },

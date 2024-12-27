@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ConfiguracionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\ProveedorController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 use PSpell\Config;
 
@@ -65,5 +67,7 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
         Route::get('barcode', [ProductoController::class, 'getCodigo'])->name('producto.getCodigo');
         Route::get('verify-code', [ProductoController::class, 'verifyCode'])->name('producto.verifyCode');
     });
-
+    Route::get('compra', [CompraController::class, 'index'])->name('compras');
+    Route::get('venta',[VentaController::class, 'index'])->name('ventas');
+    Route::get('prueba', [VentaController::class, 'prueba'])->name('prueba');
 });
