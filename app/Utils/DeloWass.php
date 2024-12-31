@@ -6,8 +6,8 @@ namespace App\Utils;
 class DeloWass
 {
     private static $dominio = "https://whatsapp.desarrollamelo.com/api/";
-    private static $instancia = "65FC85E7DD024";
-    private static $accessToken = "64711d2458bd9";
+    private static $instancia = "67740A104AB42";//"65FC85E7DD024";
+    private static $accessToken = "676311ed60ec2";//"64711d2458bd9";
 
 
     //eviar texto
