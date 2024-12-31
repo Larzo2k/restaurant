@@ -26,7 +26,7 @@
                                   <td><div style="margin-left: 10px">{{$item->address}}</div></td>
                                   <td><div style="margin-left: 10px">{{$item->cod}} {{$item->phone}}</div></td>
                                   <td>
-                                      <a onclick="" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
+                                      <a onclick="agregarAdata(`{{$item->id}}`, `{{$item->name}}`,`{{$item->address}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
                                           <i class="fa-solid fa-check" style="color:#fff"></i>
                                       </a>
                                   </td>

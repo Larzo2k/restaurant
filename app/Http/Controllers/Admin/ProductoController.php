@@ -31,7 +31,7 @@ class ProductoController extends Controller
     {
         try{
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $ruta, $request->precio, $request->stock, $request->categoria_id, $request->almacen_id);
+            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $ruta, $request->stock, $request->categoria_id, $request->almacen_id);
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),
@@ -45,7 +45,7 @@ class ProductoController extends Controller
     {
         try{
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Producto::updateProducto($request->id, $request->nombre, $request->descripcion, $ruta, $request->precio, $request->stock, $request->categoria_id, $request->almacen_id);
+            Producto::updateProducto($request->id, $request->nombre, $request->descripcion, $ruta, $request->stock, $request->categoria_id, $request->almacen_id);
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),

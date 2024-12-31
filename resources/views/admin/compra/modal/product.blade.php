@@ -15,7 +15,6 @@
                                 <th>Nombre</th>
                                 <th>Descrip.</th>
                                 <th>Stock</th>
-                                <th>Precio</th>
                                 <th>Categoria</th>
                                 <th>Almacen</th>
                                 <th width="1%"></th>
@@ -28,11 +27,10 @@
                                 <td><div style="margin-left: 10px">{{$item->name}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->description}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->stock}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->category->name}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->wherehouse->name}}</div></td>
                                 <td>
-                                    <a onclick="cargarProducto(`{{$item->id}}`,`{{$item->name}}`,`{{$item->price}}`,`{{$item->stock}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
+                                    <a onclick="cargarProducto(`{{$item->id}}`,`{{$item->name}}`,`{{$item->stock}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
                                         <i class="fa-solid fa-check" style="color:#fff"></i>
                                     </a>
                                 </td>

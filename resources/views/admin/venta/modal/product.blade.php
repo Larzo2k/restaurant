@@ -28,11 +28,11 @@
                                 <td><div style="margin-left: 10px">{{$item->name}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->description}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->stock}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->detallesCompra->first()->precio_venta}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->category->name}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->wherehouse->name}}</div></td>
                                 <td>
-                                    <a onclick="" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
+                                    <a onclick="cargarProducto(`{{$item->id}}`,`{{$item->name}}`,`{{$item->stock}}`,`{{$item->detallesCompra->first()->precio_venta}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
                                         <i class="fa-solid fa-check" style="color:#fff"></i>
                                     </a>
                                 </td>

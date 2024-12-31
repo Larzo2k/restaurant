@@ -15,7 +15,7 @@
             <div class="row">
               <div class="col-12 col-sm-4">
                 <div class="row">
-                  <label class="form-label">Buscar medicamento?</label>
+                  <label class="form-label">Buscar Producto?</label>
                 </div>
                 <div class="input-group mb-3">
                   <input class="form-control" id="medicamento" name="medicamento" type="text"
@@ -148,7 +148,7 @@
       //aqui vamos a poner lo de 
         $('#cantidad').on('input', function() {
             let cantidad = parseInt($('#cantidad').val());
-            let subtotal = cantidad * parseFloat($('#precio').val());
+            let subtotal = cantidad * parseFloat($('#precio_compra').val());
             
             cantidad_producto=cantidad;
             subtotal_producto=subtotal;
@@ -163,16 +163,16 @@
         $('#crearModalProveedor').modal('hide');
         $('#proveedor').val(nombre + ' ' + apellido);
      }
-     function cargarProducto(id,nombre,precio,stock){
+     function cargarProducto(id,nombre,stock){
       $('#id_producto').val(id);
       $('#medicamento').val(nombre);
-      $('#precio').val(precio);
+      $('#precio').val(1);
+      $('#precio_compra').val(1);
       $('#cantidad').val('1');
 
       // Multiplicar la cantidad por el precio para obtener el subtotal
       let cantidad = parseInt($('#cantidad').val());
-      let subtotal = cantidad * parseFloat(precio);
-      
+      let subtotal = cantidad * parseFloat($('#precio_compra').val());
       // Mostrar el subtotal en el campo correspondiente
       $('#subtotal').val(subtotal.toFixed(2)); // Redondear el subtotal a 2 decimales
       $('#crearModalCondominio').modal('hide');
@@ -293,10 +293,10 @@
       };
       console.log(extra);
       $.ajax({
-        url: "{{ url('api/nota_compra/store') }}",
+        url: "{{ url('admin/compra/store') }}",
         type: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         contentType: 'application/json', // Cambiamos a application/json
         processData: false, // No procesar los datos

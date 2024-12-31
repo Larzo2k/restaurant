@@ -14,12 +14,18 @@ class User extends Authenticatable
     const ESTADO_INACTIVO = 0;
     use HasApiTokens, HasFactory, Notifiable;
 
+    // Establecer que el id es un UUID (cadena)
+    protected $primaryKey = 'id';  // Esto sigue siendo el 'id' por defecto
+    public $incrementing = false;  // El id no es autoincrementable
+    protected $keyType = 'string';  // El tipo de la clave primaria es un string (UUID)
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',

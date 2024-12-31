@@ -41,10 +41,10 @@
                                 @endforelse
                             </select>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        {{-- <div class="col-md-6 mb-3">
                             <label for="precio" class="form-label">Precio<span class="required"></span></label>
                             <input type="number" class="form-control form-control-sm" name="precio" required>
-                        </div>
+                        </div> --}}
                         <div class="col-md-6 mb-3">
                             <label for="stock" class="form-label">Stock<span class="required"></span></label>
                             <input type="number" class="form-control form-control-sm" id="stock" name="stock" required>

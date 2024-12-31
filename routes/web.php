@@ -68,6 +68,16 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
         Route::get('verify-code', [ProductoController::class, 'verifyCode'])->name('producto.verifyCode');
     });
     Route::get('compra', [CompraController::class, 'index'])->name('compras');
+    Route::group(['prefix'=>'compra'], function(){
+        Route::post('store', [CompraController::class, 'store'])->name('compra.store');
+        Route::post('update/{id}', [CompraController::class, 'update'])->name('compra.update');
+        Route::post('delete/{id}', [CompraController::class, 'delete'])->name('compra.delete');
+    });
     Route::get('venta',[VentaController::class, 'index'])->name('ventas');
+    Route::group(['prefix'=>'venta'], function(){
+        Route::post('store', [VentaController::class, 'store'])->name('venta.store');
+        Route::post('update/{id}', [VentaController::class, 'update'])->name('venta.update');
+        Route::post('delete/{id}', [VentaController::class, 'delete'])->name('venta.delete');
+    });
     Route::get('prueba', [VentaController::class, 'prueba'])->name('prueba');
 });
