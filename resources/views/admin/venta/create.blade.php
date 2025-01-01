@@ -156,6 +156,8 @@
       $('#medicamento').val(nombre);
       $('#precio').val(precio);
       $('#cantidad').val('1');
+      $('#cantidad').attr('max', stock);
+      controlarInput();
 
       // Multiplicar la cantidad por el precio para obtener el subtotal
       let cantidad = parseInt($('#cantidad').val());
@@ -193,6 +195,9 @@
             // Agregar el producto al carrito
             carrito.push(producto);
             console.log(carrito);
+          }else{
+            //incrementarCantidad();
+            AgregarCantidadCarrito();
           }
           pintarCarrito();
           limpiarImput();
@@ -214,7 +219,6 @@
       tabla.innerHTML = "";
 
       const template = document.getElementById("template-carrito").content;
-      console.log(template);
       const fragment = document.createDocumentFragment();
       carrito.forEach((producto) => {
         template.querySelector("th").textContent = producto.id_producto;
@@ -237,7 +241,8 @@
   function existeElDato(carrito,id){
     let existe=false;
     carrito.forEach(element => {
-      if(element.id_producto==id){
+      console.log(element.nombre,id);
+      if(element.nombre==id){
         existe=true;
       }
     });
@@ -245,14 +250,35 @@
   }
 
   //incrementar la cantidad si es que ya existe el datos
-  function incrementarCantidad(carrito, id, cantidad,subtotal){
+  // function incrementarCantidad(carrito, id, cantidad,subtotal){
+  //   carrito.forEach(element => {
+  //   console.log(element.id_producto,id);
+  //     if(element.id_producto==id){
+  //       element.cantidad=parseFloat(element.cantidad)+parseFloat(cantidad);
+  //       element.subtotal = parseFloat(element.subtotal)+parseFloat(subtotal);
+  //     }
+  //   });
+  //   return carrito;
+  // }
+  function AgregarCantidadCarrito(){
+    let producto = $('#medicamento').val();
+    let total = 0;
+    let bandera;
     carrito.forEach(element => {
-      if(element.id_producto==id){
-        element.cantidad=parseFloat(element.cantidad)+parseFloat(cantidad);
-        element.subtotal = parseFloat(element.subtotal)+parseFloat(subtotal);
+      if(element.nombre==producto){
+        bandera = verifiStockProduct(element.cantidad);
+        if(bandera == false) {
+          //break;
+          return 0;
+        }
+        element.cantidad=parseFloat(element.cantidad)+parseFloat($('#cantidad').val());
+        element.subtotal = parseFloat(element.cantidad)*parseFloat(element.precio_venta);
       }
+      total += parseFloat(element.subtotal);
     });
-    return carrito;
+    if(bandera == true) {
+      $('#total').val(total.toFixed(2));
+    }
   }
   function inputCompletado(){
       let bandera=false;
@@ -268,6 +294,26 @@
       $('#cantidad').val('');
       $('#almacen').val('');
       $('#subtotal').val('');
+  }
+  function controlarInput(){
+    $('#cantidad').on('input', function () {
+        let max = parseFloat($(this).attr('max'));
+        let value = parseFloat($(this).val());
+        
+        if (value > max) {
+            $(this).val(max); // Ajusta el valor al máximo permitido
+            $('#subtotal').val(max*parseFloat($('#precio').val()));
+        }
+    });
+  }
+  function verifiStockProduct(cantidad){
+    let bandera=true;
+    let cantidadtOTAL = parseFloat(cantidad) + parseFloat($('#cantidad').val());
+    console.log(cantidadtOTAL,stock_producto);
+    if(cantidadtOTAL>stock_producto){
+      bandera=false;
+    }
+    return bandera;
   }
   completarVenta.addEventListener('click', function () {
       const extra = {
