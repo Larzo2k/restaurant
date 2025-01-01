@@ -40,5 +40,11 @@ class DetalleCompra extends Model
         $detalle_compra->precio_venta = $precio_venta;
         $detalle_compra->status = self::ESTADO_ACTIVO;
         $detalle_compra->save();
+        self::IncrementarStockProduct($product_id, $cantidad);
+    }
+    public static function IncrementarStockProduct($product_id, $cantidad){
+        $product = Producto::find($product_id);
+        $product->stock = $product->stock + $cantidad;
+        $product->update();
     }
 }

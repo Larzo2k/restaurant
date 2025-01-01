@@ -197,7 +197,6 @@
               precio:$('#precio_compra').val(),
               subtotal:parseFloat($('#cantidad').val())*parseFloat($('#precio_compra').val()),
             }
-            console.log(producto);
             // Obtener el valor actual del total
               let totalActual = parseFloat($('#total').val());
               // Calcular el nuevo total sumando el subtotal
@@ -206,7 +205,8 @@
               $('#total').val(nuevoTotal.toFixed(2));
             // Agregar el producto al carrito
             carrito.push(producto);
-            console.log(carrito);
+          }else{
+            AgregarCantidadCarrito();
           }
           pintarCarrito();
           limpiarImput();
@@ -251,7 +251,8 @@
   function existeElDato(carrito,id){
     let existe=false;
     carrito.forEach(element => {
-      if(element.id_producto==id){
+      console.log(element.nombre, id);
+      if(element.nombre==id){
         existe=true;
       }
     });
@@ -282,6 +283,20 @@
       $('#cantidad').val('');
       $('#almacen').val('');
       $('#subtotal').val('');
+  }
+  function AgregarCantidadCarrito(){
+    let producto = $('#medicamento').val();
+    let total = 0;
+    carrito.forEach(element => {
+      if(element.nombre==producto){
+        element.cantidad=parseFloat(element.cantidad)+parseFloat($('#cantidad').val());
+        element.subtotal = parseFloat(element.cantidad)*parseFloat(element.precio);
+      }
+      total += parseFloat(element.subtotal);
+    });
+    console.log(total);
+    console.log(carrito);
+    $('#total').val(total.toFixed(2));
   }
   completarVenta.addEventListener('click', function () {
       const extra = {
