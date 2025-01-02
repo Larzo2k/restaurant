@@ -21,6 +21,9 @@ class VentaController extends Controller
     public function store(Request $request)
     {
         try{
+            if(self::verifyStockProducto($request->productos)){
+                return response()->json(["codigo" => 1, 'mensaje' => 'No hay stock suficiente', "data" => null]);
+            }
             $user_id = auth()->user()->id;
             $venta = Venta::storeVenta($user_id,$request->id_cliente, $request->fecha,$request->total);
             $productos=$request->productos;
@@ -41,5 +44,14 @@ class VentaController extends Controller
     public function prueba(){
         $message = "hola, esta es una prueb para enviar mensajes";
         DeloWass::enviarTexto('+59170906491', $message);
+    }
+    public function verifyStockProducto($productos){
+        foreach ($productos as $producto) {
+            $producto = Producto::where('name', $producto['nombre'])->first();
+            if($producto['cantidad'] > $producto->stock){
+                return true;
+            }
+        }
+        return false;
     }
 }

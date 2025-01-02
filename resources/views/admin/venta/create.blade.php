@@ -316,6 +316,15 @@
     return bandera;
   }
   completarVenta.addEventListener('click', function () {
+    console.log(id_proveedor);
+      if(id_proveedor == ""){
+        Swal.fire({
+          icon: "error",
+          title: "Asignar un cliente",
+          text: "Por favor rellenar los campos!",
+        });
+        return;
+      }
       const extra = {
         id_empleado:id_empleado,
         id_cliente: id_proveedor,

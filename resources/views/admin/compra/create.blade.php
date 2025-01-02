@@ -137,7 +137,7 @@
     <script>
     carrito=[];
     //variables
-    let id_proveedor;
+    let id_proveedor="";
     //variable producto
     let id_producto, nombre_producto, precio_producto, cantidad_producto, subtotal_producto, stock_producto;
     const completarVenta = document.getElementById('completa_venta');
@@ -299,6 +299,15 @@
     $('#total').val(total.toFixed(2));
   }
   completarVenta.addEventListener('click', function () {
+    console.log(id_proveedor);
+      if(id_proveedor == ""){
+        Swal.fire({
+          icon: "error",
+          title: "Asignar un proveedor",
+          text: "Por favor rellenar los campos!",
+        });
+        return;
+      }
       const extra = {
         id_empleado:id_empleado,
         id_proveedor: id_proveedor,

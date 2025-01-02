@@ -36,6 +36,12 @@ class DetalleVenta extends Model
         $detalle_venta->subtotal = $subtotal;
         $detalle_venta->status = self::ESTADO_ACTIVO;
         $detalle_venta->save();
+        self::DecrementarStockProduct($product_id, $cantidad);
         return $detalle_venta;
+    }
+    public static function DecrementarStockProduct($product_id, $cantidad){
+        $product = Producto::find($product_id);
+        $product->stock = $product->stock - $cantidad;
+        $product->update();
     }
 }
