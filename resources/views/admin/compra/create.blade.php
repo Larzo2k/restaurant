@@ -156,6 +156,16 @@
             // Mostrar el subtotal en el campo correspondiente
             $('#subtotal').val(subtotal.toFixed(2));
         });
+        $('#precio_compra').on('input', function() {
+            let cantidad = parseInt($('#cantidad').val());
+            let subtotal = cantidad * parseFloat($('#precio_compra').val());
+            
+            cantidad_producto=cantidad;
+            subtotal_producto=subtotal;
+
+            // Mostrar el subtotal en el campo correspondiente
+            $('#subtotal').val(subtotal.toFixed(2));
+        });
      })
 
      function agregarAdata(id,nombre, apellido) {
