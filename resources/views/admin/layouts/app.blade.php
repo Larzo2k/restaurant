@@ -3,11 +3,11 @@
 <html lang="es">
 <head>
     <base href="/">
-    {{-- @if ($configuracion->nombre!=="")
-        <title>{{$configuracion->nombre}}</title>
-    @else --}}
+    @if ($configuracion->name !== "")
+        <title>{{$configuracion->name}}</title>
+    @else
         <title>Codominio Onix</title>
-    {{-- @endif --}}
+    @endif
     <meta charset="utf-8" />
     <meta name="description"
         content="Sistema de gestion de condominios" />
@@ -15,7 +15,7 @@
         content="Sistema de gestion de condominios" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="es_ES" />
-    {{-- <meta property="og:image" content="{{asset($configuracion->logotipo)}}"> --}}
+    <meta property="og:image" content="{{asset($configuracion->logotipo)}}">
     <meta property="og:type" content="website" />
     <meta property="og:title"
         content="Sistema de gestion de condominios" />

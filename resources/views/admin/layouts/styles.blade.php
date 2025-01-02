@@ -1,9 +1,9 @@
 <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-{{-- @if ($configuracion->logotipo!="")
+@if ($configuracion->logotipo!="")
   <link rel="shortcut icon" href="{{$configuracion->favicon}}" />
-@else --}}
+@else
   <link rel="shortcut icon" href="{/metronic/assets/media/logos/favicon.ico" />
-{{-- @endif --}}
+@endif
 <!--begin::Fonts-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 <!--end::Fonts-->

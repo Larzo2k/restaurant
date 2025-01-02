@@ -30,15 +30,20 @@ class Configuration extends Model
     public static function updateConfiguration($name = "", $telefono = "", $cod = "", $access_token = "", $image_login = "", $logotipo = "", $favicon = "")
     {
         $configuraciones = Configuration::first();
-        $configuraciones->update([
-            'name' => $name,
-            'cod' => $cod,
-            'telefono' => $telefono,
-            'access_token' => $access_token,
-            'logotipo' => $logotipo,
-            'favicon' => $favicon,
-            'image_login' => $image_login,
-        ]);
+        $configuraciones->name = $name;
+        $configuraciones->telefono = $telefono;
+        $configuraciones->cod = $cod;
+        $configuraciones->access_token = $access_token;
+        if($logotipo != ""){
+            $configuraciones->logotipo = $logotipo;
+        }
+        if($favicon != ""){
+            $configuraciones->favicon = $favicon;
+        }
+        if($image_login != ""){
+            $configuraciones->image_login = $image_login;
+        }
+        $configuraciones->update();
         return $configuraciones;
     }
 }

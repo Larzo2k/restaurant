@@ -100,28 +100,27 @@
                 style="background-image: url(https://preview.keenthemes.com/metronic8/demo1/assets/media/misc/auth-bg.png)">
                 <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
                     <a href="#" class="mb-0 mb-lg-12">
-                        {{-- @if ($configuracion->logotipo !== '')
+                        @if ($configuracion->logotipo !== '')
                             <img alt="Logo" src="{{ $configuracion->logotipo }}" class="h-60px h-lg-75px" />
-                        @else --}}
+                        @else
                             <img alt="Logo" src="/metronic8/demo1/assets/media/logos/custom-1.png"
                                 class="h-60px h-lg-75px" />
-                        {{-- @endif --}}
+                        @endif
                     </a>
 
-                    {{-- @if ($configuracion->imagen_login !== '')
+                    @if ($configuracion->image_login !== '')
                         <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
-                            style="margin-top: -30px" src="{{ $configuracion->imagen_login }}" alt="" />
-                    @else --}}
+                            style="margin-top: -30px" src="{{ $configuracion->image_login }}" alt="" />
+                    @else
                         <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
                             style="margin-top: -30px"
                             src="	https://preview.keenthemes.com/metronic8/demo1/assets/media/misc/auth-screens.png"
                             alt="" />
-                    {{-- @endif --}}
+                    @endif
 
                     <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7"
                         style="margin-top: -30px">
-                        marco
-                        {{-- {{ $configuracion->nombre }} --}}
+                        {{ $configuracion->nombre }}
                     </h1>
 
                     <div class="d-none d-lg-block text-white fs-base text-center">

@@ -8,11 +8,11 @@
         <!--begin::Logo-->
         <div class="aside-logo flex-column-auto d-flex align-items-center justify-content-center">
             <a href="{{route('index')}}" class="d-flex justify-content-center">
-                {{-- @if ($configuracion->logotipo!="")
+                @if ($configuracion->logotipo!="")
                     <img alt="Logo" src="{{$configuracion->logotipo}}"class="h-50px logo" />                    
-                @else --}}
+                @else
                     <img alt="Logo" src="/metronic8/demo1/assets/media/logos/default-dark.svg" width="80px" class="h-25px logo" /> 
-                {{-- @endif --}}
+                @endif
             </a>
         </div>
         <!--end::Logo-->
@@ -47,31 +47,24 @@
             <!--begin::Menu-->
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
                 id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                <div data-kt-menu-trigger="click" class="menu-item  menu-accordion mb-1">
+                {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion mb-1">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <i class="fas fa-briefcase"></i>
-                            <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">Gestión Administrativa</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion">
-                        {{-- @can('listar condominios') --}}
                             <div class="menu-item">
                                 <a class="menu-link"
                                     href="#">
-                                    {{-- <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span> --}}
                                     <span class="menu-icon">
                                         <i class="fa-solid fa-building"></i>
                                     </span>
                                     <span class="menu-title">Condominios</span>
                                 </a>
                             </div>
-                        {{-- @endcan
-                        @can('ver unidades') --}}
                             <div class="menu-item">
                             <a class="menu-link"
                                 href="#">
@@ -81,30 +74,22 @@
                                 <span class="menu-title"> Unidades</span>
                             </a>
                         </div>
-                        {{-- @endcan --}}
-                        
-                        {{-- @can('listar contactos') --}}
                             <div class="menu-item">
                                 <a class="menu-link"
                                     href="#">
-
-                                    {{-- <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span> --}}
                                     <div class="menu-icon">
                                         <i class="fa-solid fa-address-book"></i>
                                     </div>
                                     <span class="menu-title">Contactos</span>
                                 </a>
                             </div>
-                        {{-- @endcan --}}
 
                     </div>
-                </div>
+                </div> --}}
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('configuration') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa-solid fa-gear"></i>
                         </span>
                         <span class="menu-title">Configuración</span>
                     </a>
@@ -112,7 +97,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('clientes') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa-solid fa-user"></i>
                         </span>
                         <span class="menu-title">Clientes</span>
                     </a>
@@ -120,7 +105,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('proveedor') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa-regular fa-user"></i>
                         </span>
                         <span class="menu-title">Proveedor</span>
                     </a>
@@ -128,7 +113,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('categorias') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa-solid fa-cubes"></i>
                         </span>
                         <span class="menu-title">categorias</span>
                     </a>
@@ -136,7 +121,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('almacen') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa fa-clipboard-list"></i>
                         </span>
                         <span class="menu-title">Almacen</span>
                     </a>
@@ -144,7 +129,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('productos') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa fa-cube"></i>
                         </span>
                         <span class="menu-title">Productos</span>
                     </a>
@@ -152,7 +137,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('compras') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa fa-shopping-bag"></i>
                         </span>
                         <span class="menu-title">Compra</span>
                     </a>
@@ -160,7 +145,7 @@
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('ventas') }}">
                         <span class="menu-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
+                            <i class="fa fa-money-bill-alt"></i> <!-- Billete -->
                         </span>
                         <span class="menu-title">Venta</span>
                     </a>
