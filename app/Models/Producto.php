@@ -57,7 +57,7 @@ class Producto extends Model
         $view = view('admin.producto.table', compact('productos'))->render();
         return $view;
     }
-    public static function storeProducto($name, $cod, $descripcion, $imagen, $stock, $category_id, $wherehouse_id, $status = self::ESTADO_ACTIVO){
+    public static function storeProducto($name, $cod, $descripcion, $imagen, $category_id, $wherehouse_id, $status = self::ESTADO_ACTIVO){
         $producto = new self();
         $producto->id = Str::uuid();
         $producto->name = $name;
@@ -65,7 +65,7 @@ class Producto extends Model
         $producto->cod_barra = self::generarCodigoBarra($cod, $name);
         $producto->description = $descripcion;
         $producto->image = $imagen;
-        $producto->stock = $stock;
+        $producto->stock = 0;
         $producto->category_id = $category_id;
         $producto->wherehouse_id = $wherehouse_id;
         $producto->status = $status;

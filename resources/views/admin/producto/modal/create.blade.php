@@ -45,24 +45,22 @@
                             <label for="precio" class="form-label">Precio<span class="required"></span></label>
                             <input type="number" class="form-control form-control-sm" name="precio" required>
                         </div> --}}
-                        <div class="col-md-6 mb-3">
+                        <!-- <div class="col-md-6 mb-3">
                             <label for="stock" class="form-label">Stock<span class="required"></span></label>
                             <input type="number" class="form-control form-control-sm" id="stock" name="stock" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
+                        </div> -->
+                        <!-- <div class="col-md-12 mb-3">
                             <label for="stock" class="form-label">Código de barra <span class="required"></span></label>
                             <div class="d-flex justify-content-center">
-                                <!-- Contenedor para el código de barras -->
-                                {{-- <svg id="barcode" style="border: 1px solid #ddd; padding: 10px;"></svg> --}}
                                  <img id="barcodeImage" src="" alt="Código de barras" style="display:none;">
                             </div>
                         </div>
-                        <input type="hidden" id="barcodeInput" name="codigo_barras">
+                        <input type="hidden" id="barcodeInput" name="codigo_barras"> -->
 
                         <!-- Botón para generar el código de barras -->
-                        <div class="d-flex justify-content-center mt-3">
+                        <!-- <div class="d-flex justify-content-center mt-3">
                             <button type="button" class="btn btn-primary" onclick="generateBarcode()">Generar Código de Barra</button>
-                        </div>
+                        </div> -->
                         <div class="col-md-12 mb-5">
                             <label class="form-label">Imagen</label>
                             <div class="image-upload-wrap" id="image-upload-wrap1">

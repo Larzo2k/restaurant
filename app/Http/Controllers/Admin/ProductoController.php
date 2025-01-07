@@ -30,8 +30,16 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         try{
+            $existeCodigo = Producto::where('cod', $request->codigo)->exists();
+            if($existeCodigo){
+                return response()->json([
+                    'codigo' => 1,
+                    'data' => null,
+                    'mensaje' => 'Codigo ya existe!'
+                ]);
+            }
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $ruta, $request->stock, $request->categoria_id, $request->almacen_id);
+            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $ruta, $request->categoria_id, $request->almacen_id);
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),

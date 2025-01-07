@@ -120,17 +120,11 @@
 
                     <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7"
                         style="margin-top: -30px">
-                        {{ $configuracion->nombre }}
+                        {{ $configuracion->name }}
                     </h1>
 
                     <div class="d-none d-lg-block text-white fs-base text-center">
-                        In this kind of post, <a href="#" class="AA5-hover text-warning fw-bold me-1">the
-                            blogger</a>
-
-                        introduces a person they’ve intervieA<br /> and provides some background information about
-
-                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the interviewee</a>
-                        and their <br /> work following this is a transcript of the interview.
+                        Tu lugar de confianza.
                     </div>
                 </div>
             </div>
