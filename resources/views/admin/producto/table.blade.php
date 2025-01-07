@@ -39,7 +39,7 @@
                             <td>{{ $producto->stock }}</td> -->
                             <td class="text-end">
                                 {{-- @can('editar directivos') --}}
-                                    <a onclick="editar(`{{$producto->id}}`,`{{$producto->name}}`, `{{$producto->description}}`, `{{$producto->image}}`, `{{$producto->price}}`, `{{$producto->stock}}`, `{{$producto->cod}}`, `{{$producto->category_id}}`, `{{$producto->wherehouse_id}}`)"
+                                    <a onclick="editar(`{{$producto->id}}`,`{{$producto->name}}`, `{{$producto->description}}`, `{{$producto->image}}`, `{{$producto->price}}`, `{{$producto->stock}}`, `{{$producto->cod}}`, `{{$producto->diametro}}`, `{{$producto->longitud}}`, `{{$producto->category_id}}`, `{{$producto->wherehouse_id}}`)"
                                     class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
                                     data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
                                     data-bs-original-title="Editar">

@@ -39,7 +39,7 @@ class ProductoController extends Controller
                 ]);
             }
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $ruta, $request->categoria_id, $request->almacen_id);
+            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $request->diametro?? "", $request->longitud ?? "", $ruta, $request->categoria_id, $request->almacen_id);
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),

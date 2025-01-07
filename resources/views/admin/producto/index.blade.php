@@ -163,9 +163,11 @@
 
           });
         })
-        function editar(id, name, descripcion, image, precio, stock, codigo,category_id, wherehouse_id) {
+        function editar(id, name, descripcion, image, precio, stock, codigo, diametro, longitud, category_id, wherehouse_id) {
           $('#productoFormEditar input[name="id"]').val(id);
           $('#productoFormEditar input[name="nombre"]').val(name);
+          $('#productoFormEditar input[name="diametro"]').val(diametro);
+          $('#productoFormEditar input[name="longitud"]').val(longitud);
           $('#productoFormEditar textarea[name="descripcion"]').val(descripcion);
           $('#productoFormEditar input[name="precio"]').val(precio);
           $('#productoFormEditar input[name="stock"]').val(stock);

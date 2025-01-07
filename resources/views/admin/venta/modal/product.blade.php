@@ -1,5 +1,5 @@
 <div class="modal fade" id="crearModalCondominio" tabindex="-1" aria-labelledby="exampleModalCrearMedicamento" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCrearMedicamento">Lista Productos</h5>
@@ -16,7 +16,9 @@
                                 <th>Descrip.</th>
                                 <th>Stock</th>
                                 <th>Precio</th>
-                                <th>Categoria</th>
+                                <th>Longitud</th>
+                                <th>Diametro</th>
+                                {{-- <th>Categoria</th> --}}
                                 <th>Almacen</th>
                                 <th width="1%"></th>
                             </tr>
@@ -29,7 +31,9 @@
                                 <td><div style="margin-left: 10px">{{$item->description}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->stock}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->detallesCompra->first()->precio_venta}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->category->name}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->longitud}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->diametro}}</div></td>
+                                {{-- <td><div style="margin-left: 10px">{{$item->category->name}}</div></td> --}}
                                 <td><div style="margin-left: 10px">{{$item->wherehouse->name}}</div></td>
                                 <td>
                                     <a onclick="cargarProducto(`{{$item->id}}`,`{{$item->name}}`,`{{$item->stock}}`,`{{$item->detallesCompra->first()->precio_venta}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">

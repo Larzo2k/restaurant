@@ -33,6 +33,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');;
 
 Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('chart', [DashboardController::class, 'chart'])->name('chart');
     Route::get('configuration', [ConfiguracionController::class, 'index'])->name('configuration');
     Route::post('configuration/update', [ConfiguracionController::class, 'update'])->name('configuration.update');
     Route::get('clientes', [ClienteController::class, 'index'])->name('clientes');

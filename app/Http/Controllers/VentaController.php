@@ -14,7 +14,7 @@ class VentaController extends Controller
 {
     public function index()
     {
-        $productos = Producto::with('detallesCompra')->where('status', 1)->get();
+        $productos = Producto::where('stock', '>', 0)->with('category')->with('detallesCompra')->where('status', 1)->get();
         $clientes = Cliente::where('status', 1)->get();
         return view('admin.venta.create', compact('productos', 'clientes'));
     }

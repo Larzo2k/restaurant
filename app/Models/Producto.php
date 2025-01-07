@@ -27,6 +27,8 @@ class Producto extends Model
         'description',
         'image',
         'stock',
+        'diametro',
+        'longitud',
         'category_id',
         'supplier_id',
         'wherehouse_id',
@@ -57,13 +59,15 @@ class Producto extends Model
         $view = view('admin.producto.table', compact('productos'))->render();
         return $view;
     }
-    public static function storeProducto($name, $cod, $descripcion, $imagen, $category_id, $wherehouse_id, $status = self::ESTADO_ACTIVO){
+    public static function storeProducto($name, $cod, $descripcion, $diametro, $longitud, $imagen, $category_id, $wherehouse_id, $status = self::ESTADO_ACTIVO){
         $producto = new self();
         $producto->id = Str::uuid();
         $producto->name = $name;
         $producto->cod = $cod;
         $producto->cod_barra = self::generarCodigoBarra($cod, $name);
         $producto->description = $descripcion;
+        $producto->diametro = $diametro;
+        $producto->longitud = $longitud;
         $producto->image = $imagen;
         $producto->stock = 0;
         $producto->category_id = $category_id;

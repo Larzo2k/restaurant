@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('cod_barra')->default('');
             $table->string('description');
             $table->string('image')->default('');
-            $table->string('stock');
+            $table->string('stock')->default('');
+            $table->string('diametro')->default('');
+            $table->string('longitud')->default('');
             $table->uuid('category_id');
             $table->foreign('category_id')->references('id')->on('category');
             $table->uuid('wherehouse_id');

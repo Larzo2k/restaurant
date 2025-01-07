@@ -1,5 +1,5 @@
 <div class="modal fade" id="crearModalCondominio" tabindex="-1" aria-labelledby="exampleModalCrearMedicamento" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCrearMedicamento">Lista Productos</h5>
@@ -15,6 +15,8 @@
                                 <th>Nombre</th>
                                 <th>Descrip.</th>
                                 <th>Stock</th>
+                                <th>Longitud</th>
+                                <th>Diametro</th>
                                 <th>Categoria</th>
                                 <th>Almacen</th>
                                 <th width="1%"></th>
@@ -27,6 +29,8 @@
                                 <td><div style="margin-left: 10px">{{$item->name}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->description}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->stock}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->longitud}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->diametro}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->category->name}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->wherehouse->name}}</div></td>
                                 <td>
