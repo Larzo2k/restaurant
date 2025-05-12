@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <a data-bs-dismiss="modal" class="btn btn-secondary btn-sm">Cancelar</a>
-                    <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                    {{-- <button type="submit" class="btn btn-primary btn-sm">Guardar</button> --}}
                 </div>
             </form>
         </div>

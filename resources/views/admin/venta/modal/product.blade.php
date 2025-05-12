@@ -16,10 +16,10 @@
                                 <th>Descrip.</th>
                                 <th>Stock</th>
                                 <th>Precio</th>
-                                <th>Longitud</th>
-                                <th>Diametro</th>
+                                {{-- <th>Longitud</th>
+                                <th>Diametro</th> --}}
                                 {{-- <th>Categoria</th> --}}
-                                <th>Almacen</th>
+                                {{-- <th>Almacen</th> --}}
                                 <th width="1%"></th>
                             </tr>
                         </thead>
@@ -29,14 +29,14 @@
                                 <td><div style="margin-left: 10px"><img src="{{asset($item->image)}}" height="40" alt=""></div></td>
                                 <td><div style="margin-left: 10px">{{$item->name}}</div></td>
                                 <td><div style="margin-left: 10px">{{$item->description}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->stock}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->detallesCompra->first()->precio_venta}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->longitud}}</div></td>
-                                <td><div style="margin-left: 10px">{{$item->diametro}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->dailyMenuProduct->stock}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->price}}</div></td>
+                                {{-- <td><div style="margin-left: 10px">{{$item->longitud}}</div></td>
+                                <td><div style="margin-left: 10px">{{$item->diametro}}</div></td> --}}
                                 {{-- <td><div style="margin-left: 10px">{{$item->category->name}}</div></td> --}}
-                                <td><div style="margin-left: 10px">{{$item->wherehouse->name}}</div></td>
+                                {{-- <td><div style="margin-left: 10px">{{$item->wherehouse->name}}</div></td> --}}
                                 <td>
-                                    <a onclick="cargarProducto(`{{$item->id}}`,`{{$item->name}}`,`{{$item->stock}}`,`{{$item->detallesCompra->first()->precio_venta}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
+                                    <a onclick="cargarProducto(`{{$item->id}}`,`{{$item->name}}`,`{{$item->dailyMenuProduct->stock}}`,`{{$item->price}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="Editar" style="background-color:green">
                                         <i class="fa-solid fa-check" style="color:#fff"></i>
                                     </a>
                                 </td>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-footer">
                     <a data-bs-dismiss="modal" class="btn btn-secondary btn-sm">Cancelar</a>
-                    <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                    {{-- <button type="submit" class="btn btn-primary btn-sm">Guardar</button> --}}
                 </div>
             </form>
         </div>

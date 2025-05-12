@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wherehouse', function (Blueprint $table) {
+        Schema::create('daily_menus', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->date('date');
             $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wherehouse');
+        Schema::dropIfExists('daily_menus');
     }
 };

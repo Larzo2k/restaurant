@@ -9,42 +9,34 @@
                     <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
                         <th class="sorting_disabled" >#</th>
                         <th class="sorting_disabled" rowspan="1" colspan="1">Imagen</th>
-                        <!-- <th class="sorting_disabled" rowspan="1" colspan="1">Codigo barra</th> -->
                         <th class="sorting_disabled" rowspan="1" colspan="1">
                             Nombre</th>
-                        <th class="sorting_disabled" rowspan="1" colspan="1">
-                            Descripción</th>
-                        <th class="sorting_disabled" rowspan="1" colspan="1">
-                            Precio</th>
-                        <th class="sorting_disabled" rowspan="1" colspan="1">
-                            Categoria</th>
-                            <!-- <th class="sorting_disabled" rowspan="1" colspan="1">
-                            precio</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1">
-                            stock</th> -->
+                            Descripción</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1">Precio</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1">
+                            Stock</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1">
+                            Categoria</th>
                         <th class="min-w-70px text-end sorting_disabled" rowspan="1" colspan="1">Opciones</th>
                     </tr>
                 </thead>
                 <!--end::Table head-->
                 <!--begin::Table body-->
                 <tbody class="text-gray-600">
-                    @forelse ($productos as $producto)
+                    @forelse ($productoEnMenu as $producto)
                         <tr class="odd">
                             <td class="col-1">{{ $loop->iteration }}</td>
                             <td class="col-1">
                                 <img src="{{asset($producto->image)}}" height="40" alt="">
                             </td>
-                            <!-- <td class="col-1">
-                                <img src="{{asset($producto->getCidogoBarraPng())}}" height="30" width="50" alt="">
-                            </td> -->
                             <td>{{ $producto->name }}</td>
                             <td>{{ $producto->description }}</td>
                             <td>{{ $producto->price }}</td>
+                            <td>{{ $producto->dailyMenuProduct->stock }}</td>
                             <td>{{ $producto->category->name }}</td>
-                            {{-- <td>{{ $producto->stock }}</td> --}}
                             <td class="text-end">
-                                {{-- @can('editar directivos') --}}
-                                    <a onclick="editar(`{{$producto->id}}`,`{{$producto->name}}`, `{{$producto->description}}`, `{{$producto->image}}`, `{{$producto->price}}`, `{{$producto->stock}}`, `{{$producto->cod}}`, `{{$producto->diametro}}`, `{{$producto->longitud}}`, `{{$producto->category_id}}`, `{{$producto->wherehouse_id}}`)"
+                                    <a onclick="editar(`{{$producto->dailyMenuProduct->id}}`,`{{$producto->name}}`,`{{$producto->description}}`,`{{$producto->price}}`,`{{$producto->dailyMenuProduct->stock}}`)"
                                     class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
                                     data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
                                     data-bs-original-title="Editar">
@@ -62,15 +54,17 @@
                                         </span>
                                         <!--end::Svg Icon-->
                                     </a>
-                                {{-- @endcan --}}
-                                  <a onclick="eliminar(`{{$producto->id}}`, `{{$producto->name}}`, `{{$producto->address}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="" data-kt-action="product_remove" data-bs-original-title="Dar de baja">
+
+                                <!--begin::Delete-->
+                                  <a onclick="eliminar(`{{$producto->dailyMenuProduct->id}}`,`{{$producto->name}}`,`{{$producto->dailyMenuProduct->stock}}`)" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="" data-kt-action="product_remove" data-bs-original-title="Dar de baja">
                                     <i class="fa-solid fa-trash"></i>
                                   </a>
+                                <!--end::Delete-->
                             </td>
                         </tr>
                     @empty
                         <tr class="odd">
-                            <td colspan="3"> No se encontraron datos</td>
+                            <td colspan="3"> No hay productos a la venta</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -79,5 +73,5 @@
         </div>
     </div>
     <!--end::Table-->
-    {{$productos->links()}}
+    {{-- {{$productoEnMenu->links()}} --}}
 </div>

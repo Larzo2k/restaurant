@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Cliente;
+use App\Models\Configuration;
 use App\Models\Venta;
 use App\Utils\DeloWass;
 use Illuminate\Bus\Queueable;
@@ -32,17 +33,31 @@ class SenNotificationClient implements ShouldQueue
     {
         $cliente = Cliente::findOrfail($this->cliente_id);
         $venta = Venta::findOrfail($this->venta_id);
-        $message = "🟦 *Todo perno* ✅
+        $configuracion = Configuration::first();
+        $message = "🟦 *$configuracion->name* ✅
 
 *💵Monto:* $venta->total Bs.
 *PAGADO* ✅
 
-*Código de pago:* $venta->id
+*Código de pago:* $venta->nro_recibo
 
 *Pagado por:* $cliente->name $cliente->address
 *Fecha y hora del pago:* $venta->fecha
 
 > Gracias por su compra";
-        DeloWass::enviarTexto($cliente->cod.$cliente->phone, $message);
+        DeloWass::enviarArchivo(
+            $cliente->cod.$cliente->phone, 
+            $message, 
+            "https://refactoring.guru/files/design-patterns-es-demo.pdf",
+            // env("APP_URL").$venta->url_pdf, 
+            "Comprobante de venta"
+        );
+        // Waziper::enviarArchivoEnMasivo(
+        //     $configuracion->access_token_wsp,
+        //     $condominio->instancia_wsp, 
+        //     $cod_pais . $numero, 
+        //     $mensajeTextoPlano,
+        //     env("APP_URL").$this->expensa->url_aviso
+        // );
     }
 }

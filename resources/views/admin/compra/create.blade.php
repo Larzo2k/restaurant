@@ -248,15 +248,30 @@
         template.querySelector("span").textContent = producto.precio * producto.cantidad;
 
         // Botones
-        template.querySelector(".btn-info").dataset.id = producto.id_producto;
+        template.querySelector(".btn-info").dataset.nombre = producto.nombre;
 
         const clone = template.cloneNode(true);
+        clone.querySelector(".btn-info").addEventListener("click", () => {
+          event.preventDefault();
+          eliminarProducto(producto.nombre);
+        });
         fragment.appendChild(clone);
       });
 
       tabla.appendChild(fragment);
     }
+  function eliminarProducto(name){
+    carrito = carrito.filter((producto) => producto.nombre !== name);
+    actualizarTotal();
+    pintarCarrito();
+  }
+  function actualizarTotal() {
+    // Sumar los subtotales de todos los productos en el carrito
+    const nuevoTotal = carrito.reduce((acc, producto) => acc + producto.subtotal, 0);
 
+    // Actualizar el campo de total con el nuevo total
+    $('#total').val(nuevoTotal.toFixed(2)); // El valor se redondea a dos decimales
+  }
     //verificar si el dato ingresando ya existe
   function existeElDato(carrito,id){
     let existe=false;

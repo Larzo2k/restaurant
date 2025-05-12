@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supplier', function (Blueprint $table) {
+        Schema::create('daily_menu_product', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('address');
-            $table->string('email');
-            $table->string('cod');
-            $table->string('phone');
-            $table->string('image')->default('');
+            $table->integer('quantity');
+            $table->integer('stock');
+            $table->uuid('daily_menu_id');
+            $table->uuid('product_id');
+            $table->foreign('daily_menu_id')->references('id')->on('daily_menus');
+            $table->foreign('product_id')->references('id')->on('product');
             $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supplier');
+        Schema::dropIfExists('daily_menu_product');
     }
 };

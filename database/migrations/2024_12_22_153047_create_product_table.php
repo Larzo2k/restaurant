@@ -18,13 +18,10 @@ return new class extends Migration
             $table->string('cod_barra')->default('');
             $table->string('description');
             $table->string('image')->default('');
-            $table->string('stock')->default('');
-            $table->string('diametro')->default('');
-            $table->string('longitud')->default('');
+            $table->integer('stock')->default(0);
+            $table->double('price');
             $table->uuid('category_id');
             $table->foreign('category_id')->references('id')->on('category');
-            $table->uuid('wherehouse_id');
-            $table->foreign('wherehouse_id')->references('id')->on('wherehouse');
             $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
             $table->timestamps();
         });

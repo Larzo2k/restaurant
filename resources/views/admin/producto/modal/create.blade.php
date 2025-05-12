@@ -18,10 +18,10 @@
                             <input type="number" class="form-control form-control-sm" id="codigo" name="codigo" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="descripcion" class="form-label">Descripción<span class="required"></span></label>
-                            <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" required></textarea>
+                            <label for="apellido" class="form-label">Precio<span class="required"></span></label>
+                            <input type="number" class="form-control form-control-sm" id="price" name="price" required>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        {{-- <div class="col-md-6 mb-3">
                             <label for="almacen_id" class="form-label">Almacen<span class="required"></span></label>
                             <select class="form-select form-select-sm" data-control="select2" data-placeholder="Seleccione un almacen" name="almacen_id" required>
                                 <option value=""></option>
@@ -30,8 +30,8 @@
                                 @empty
                                 @endforelse
                             </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
+                        </div> --}}
+                        <div class="col-md-6 mb-3">
                             <label for="categoria_id" class="form-label">Categoria<span class="required"></span></label>
                             <select class="form-select form-select-sm" data-control="select2" data-placeholder="Seleccione una categoria" name="categoria_id" required>
                                 <option value=""></option>
@@ -41,20 +41,9 @@
                                 @endforelse
                             </select>
                         </div>
-                        <div class="col-md-4 mb-6 documento">
-                            <label for="" class="form-label required">Diametro</label>
-                            <div class="input-group input-group-sm">
-                                <input type="text" name="diametro" class="form-control form-control-sm" required="">
-                                <span class="input-group-text">Pulgadas</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-6 documento">
-                            <label for="" class="form-label required">Longitud</label>
-                            <div class="input-group input-group-sm">
-                                <input type="text" name="longitud" class="form-control form-control-sm" required="">
-                                <span class="input-group-text">Pulgadas</span>
-                                {{-- <span class="input-group-text"><i class="fas fa-columns" aria-hidden="true"></i></span> --}}
-                            </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="descripcion" class="form-label">Descripción<span class="required"></span></label>
+                            <textarea class="form-control form-control-sm" id="descripcion" name="descripcion" required></textarea>
                         </div>
                         <!-- <div class="col-md-6 mb-3">
                             <label for="stock" class="form-label">Stock<span class="required"></span></label>

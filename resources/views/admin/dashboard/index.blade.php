@@ -6,17 +6,17 @@
 @endsection
 
 @section('toolbar')
-<!--begin::Toolbar-->
-<div class="toolbar" id="kt_toolbar">
-    <!--begin::Container-->
-    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-        <!--begin::Page title-->
-        <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
-            data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
-            class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-            <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Dashboard</h1>
-            {{-- <!--end::Title-->
+    <!--begin::Toolbar-->
+    <div class="toolbar" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <!--begin::Page title-->
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
+                data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
+                class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                <!--begin::Title-->
+                <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Dashboard</h1>
+                {{-- <!--end::Title-->
             <!--begin::Separator-->
             <span class="h-20px border-gray-300 border-start mx-4"></span>
             <!--end::Separator-->
@@ -62,12 +62,12 @@
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb--> --}}
-        </div>
-        <!--end::Page title-->
-        <!--begin::Actions-->
-        <div class="d-flex align-items-center gap-2 gap-lg-3">
-            <!--begin::Filter menu-->
-            {{-- <div class="m-0">
+            </div>
+            <!--end::Page title-->
+            <!--begin::Actions-->
+            <div class="d-flex align-items-center gap-2 gap-lg-3">
+                <!--begin::Filter menu-->
+                {{-- <div class="m-0">
                 <!--begin::Menu toggle-->
                 <a href="#"
                     class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder"
@@ -174,128 +174,136 @@
                 </div>
                 <!--end::Menu 1-->
             </div> --}}
-            <!--end::Filter menu-->
-            <!--begin::Secondary button-->
-            <!--end::Secondary button-->
-            <!--begin::Primary button-->
-            {{-- <a href="../../demo1/dist/.html" class="btn btn-sm btn-primary"
+                <!--end::Filter menu-->
+                <!--begin::Secondary button-->
+                <!--end::Secondary button-->
+                <!--begin::Primary button-->
+                {{-- <a href="../../demo1/dist/.html" class="btn btn-sm btn-primary"
                 data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a> --}}
-            <!--end::Primary button-->
+                <!--end::Primary button-->
+            </div>
+            <!--end::Actions-->
         </div>
-        <!--end::Actions-->
+        <!--end::Container-->
     </div>
-    <!--end::Container-->
-</div>
-<!--end::Toolbar-->
+    <!--end::Toolbar-->
 @endsection
 
 @section('content')
     <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <!-- Primera fila -->
-                <div class="row justify-content-center m-7">
-                    <div class="col-md-3 m-3" style="background-color: rgb(39, 48, 215); color:#fff; height:auto; padding:10px; border-radius:10px">
-                      <h5 style="color: #fff">Total Producto </h5>
-                      <p style="margin-top: 10px; margin-left:10px"> <b id="cantdadMedicamento">{{$totalProductos}}</b> Productos</p>
-                      <a href="" target="_blank" style="margin-top: 10px; color:#fff">Ver detalles</a>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <!-- Primera fila -->
+                    <div class="row justify-content-center m-7">
+                        <div class="col-md-3 m-3"
+                            style="background-color: rgb(39, 48, 215); color:#fff; height:auto; padding:10px; border-radius:10px">
+                            <h5 style="color: #fff">Total Producto </h5>
+                            <p style="margin-top: 10px; margin-left:10px"> <b
+                                    id="cantdadMedicamento">{{ $totalProductos }}</b> Productos</p>
+                            <a href="{{ route('productos') }}" style="margin-top: 10px; color:#fff">Ver
+                                detalles</a>
+                        </div>
+                        <div class="col-md-3 m-3"
+                            style="background-color: green; color:#fff; height:auto; padding:10px; border-radius:10px">
+                            <h5 style="color: #fff">Venta del día</h5>
+                            <p style="margin-top: 10px; margin-left:10px"><b id="ventaDelDia">{{ $ventaTotal }}</b> BS</p>
+                            <a href="" target="_blank" style="margin-top: 10px; color:#fff">Ver detalles</a>
+                        </div>
+                        <div class="col-md-3 m-3"
+                            style="background-color: red; color:#fff; height:auto; padding:10px; border-radius:10px">
+                            <h5 style="color: #fff">Producto Stock</h5>
+                            <p style="margin-top: 10px; margin-left:10px"><b
+                                    id="stockProducto">{{ $productosConStockCero }}</b> Producto con stock minimo</p>
+                            <a href="" target="_blank" style="margin-top: 10px; color:#fff">Ver detalles</a>
+                        </div>
                     </div>
-                    <div class="col-md-3 m-3" style="background-color: green; color:#fff; height:auto; padding:10px; border-radius:10px">
-                      <h5 style="color: #fff">Venta del día</h5>
-                      <p style="margin-top: 10px; margin-left:10px"><b id="ventaDelDia">{{$ventaTotal}}</b> BS</p>
-                      <a href="" target="_blank" style="margin-top: 10px; color:#fff">Ver detalles</a>
-                    </div>
-                    <div class="col-md-3 m-3" style="background-color: red; color:#fff; height:auto; padding:10px; border-radius:10px">
-                      <h5 style="color: #fff">Producto Stock</h5>
-                      <p style="margin-top: 10px; margin-left:10px"><b id="stockProducto">{{$productosConStockCero}}</b> Producto con stock minimo</p>
-                      <a href="" target="_blank" style="margin-top: 10px; color:#fff">Ver detalles</a>
-                    </div>
-                </div>
-                <!-- Segunda fila -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="text-center" style="color: #5667af; font-size:30px; font-weight: 900; margin-top:20px">Venta Mes</div>
-                        <div class="card-body">
-                            <canvas id="myChart" style="width: 700px"></canvas>
+                    <!-- Segunda fila -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center"
+                                style="color: #5667af; font-size:30px; font-weight: 900; margin-top:20px">Venta Mes</div>
+                            <div class="card-body">
+                                <canvas id="myChart" style="width: 700px"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    $(document).ready(function(){
-        dibujarGrafica();
-    });
-    function dibujarGrafica(){
-        $.ajax({
-                        url:`{{url('admin/chart')}}`,
-                        type: "GET",
-                        data:{
-                            _token: "{{csrf_token()}}",
-                        },
-                        success:function(response){
-                            console.log(response.chart);
-                            dibujarGrafico(response.chart);
-                            // if(response.codigo == 0){
-                            //     $('#table').html(response.data);
-                                // Toast.fire({
-                                //     icon: 'success',
-                                //     title: response.mensaje,
-                                // });
-                            // }else{
-                            //     Toast.fire({
-                            //         icon: 'error',
-                            //         title: response.mensaje,
-                            //     });
-                            // }
-                        },
-                        error: function(err,err1,err2){
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function() {
+            dibujarGrafica();
+        });
 
+        function dibujarGrafica() {
+            $.ajax({
+                url: `{{ url('admin/chart') }}`,
+                type: "GET",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    console.log(response.chart);
+                    dibujarGrafico(response.chart);
+                    // if(response.codigo == 0){
+                    //     $('#table').html(response.data);
+                    // Toast.fire({
+                    //     icon: 'success',
+                    //     title: response.mensaje,
+                    // });
+                    // }else{
+                    //     Toast.fire({
+                    //         icon: 'error',
+                    //         title: response.mensaje,
+                    //     });
+                    // }
+                },
+                error: function(err, err1, err2) {
+
+                }
+            });
+        }
+
+        function dibujarGrafico(grafico) {
+            // Extraer nombres y valores para las etiquetas del gráfico
+            var nombres = grafico.map(function(item) {
+                return item.nombre;
+            });
+
+            var valores = grafico.map(function(item) {
+                return item.total_vendido;
+            });
+
+            // Obtener el contexto del canvas
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Crear el gráfico
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: nombres, // Etiquetas de los nombres de los medicamentos
+                    datasets: [{
+                        label: 'Cantidad vendida',
+                        data: valores, // Datos de cantidad vendida
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
-                    });
-    }
-    
-    function dibujarGrafico(grafico) {
-        // Extraer nombres y valores para las etiquetas del gráfico
-        var nombres = grafico.map(function(item) {
-            return item.nombre;
-        });
-
-        var valores = grafico.map(function(item) {
-            return item.total_vendido;
-        });
-
-        // Obtener el contexto del canvas
-        var ctx = document.getElementById('myChart').getContext('2d');
-
-        // Crear el gráfico
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: nombres, // Etiquetas de los nombres de los medicamentos
-                datasets: [{
-                    label: 'Cantidad vendida',
-                    data: valores, // Datos de cantidad vendida
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
                     }
                 }
-            }
-        });
-    }
-</script>
+            });
+        }
+    </script>
 @endpush

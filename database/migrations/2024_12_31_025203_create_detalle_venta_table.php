@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('detalle_venta', function (Blueprint $table) {
             $table->uuid('id')->primary();  // Clave primaria 'id' de tipo UUID
             $table->uuid('venta_id');  // 'venta_id' debe ser de tipo UUID
-            $table->uuid('product_id'); // 'product_id' debe ser de tipo UUID
+            //$table->uuid('product_id'); // 'product_id' debe ser de tipo UUID
+            $table->uuid('daily_menu_product_id');
             $table->integer('cantidad');
             $table->double('subtotal');
             $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->foreign('venta_id')->references('id')->on('venta');
 
             // Relación con la tabla 'product'
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('daily_menu_product_id')->references('id')->on('daily_menu_product');
         });
     }
 

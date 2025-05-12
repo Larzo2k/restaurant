@@ -27,18 +27,16 @@ class Producto extends Model
         'description',
         'image',
         'stock',
-        'diametro',
-        'longitud',
         'category_id',
-        'supplier_id',
-        'wherehouse_id',
+        'price',
         'status'
     ];
     const ESTADO_ACTIVO = 1;
     const ESTADO_INACTIVO = 0;
-    public function detallesCompra()
+    public function dailyMenuProduct()
     {
-        return $this->hasMany(DetalleCompra::class, 'product_id');
+        return $this->hasOne(DailyMenuProduct::class, 'product_id')
+                            ->where('status', 1);
     }
     public static function scopeListadoGeneral(Builder $query, Request $request = null)
     {
@@ -59,32 +57,28 @@ class Producto extends Model
         $view = view('admin.producto.table', compact('productos'))->render();
         return $view;
     }
-    public static function storeProducto($name, $cod, $descripcion, $diametro, $longitud, $imagen, $category_id, $wherehouse_id, $status = self::ESTADO_ACTIVO){
+    public static function storeProducto($name, $cod, $descripcion, $imagen, $category_id, $status = self::ESTADO_ACTIVO, $price){
         $producto = new self();
         $producto->id = Str::uuid();
         $producto->name = $name;
         $producto->cod = $cod;
         $producto->cod_barra = self::generarCodigoBarra($cod, $name);
         $producto->description = $descripcion;
-        $producto->diametro = $diametro;
-        $producto->longitud = $longitud;
         $producto->image = $imagen;
         $producto->stock = 0;
         $producto->category_id = $category_id;
-        $producto->wherehouse_id = $wherehouse_id;
         $producto->status = $status;
+        $producto->price = $price;
         $producto->save();
     }
-    public static function updateProducto($id, $name, $descripcion, $imagen, $stock, $category_id, $wherehouse_id, $status = self::ESTADO_ACTIVO){
+    public static function updateProducto($id, $name, $descripcion, $imagen, $category_id, $status = self::ESTADO_ACTIVO){
         $cliente = self::find($id);
         $cliente->name = $name;
         $cliente->description = $descripcion;
         if($imagen != null){
             $cliente->image = $imagen;
         }
-        $cliente->stock = $stock;
         $cliente->category_id = $category_id;
-        $cliente->wherehouse_id = $wherehouse_id;
         $cliente->status = $status;
         $cliente->update();
     }
@@ -95,9 +89,6 @@ class Producto extends Model
     }
     public function category(){
         return $this->belongsTo(Categoria::class, 'category_id', 'id');
-    }
-    public function wherehouse(){
-        return $this->belongsTo(Almacen::class, 'wherehouse_id', 'id');
     }
     public static function generarCodigoBarra($cod, $name){
         // $codigoBarrasData = base64_decode($cod);

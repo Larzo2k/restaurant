@@ -178,7 +178,7 @@
                                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
                                         </div>
                                     </div>
-                                    <div class="row mb-6 contenedor">
+                                    {{-- <div class="row mb-6 contenedor">
                                         <label class="col-lg-4 col-form-label required fw-semibold fs-6">Código de país</label>
                                         <div class="col-lg-8 fv-row fv-plugins-icon-container">
                                             <select class="orm-control form-control-lg mb-3 mb-lg-0 form-select form-select-sm input" data-control="select2" data-placeholder="Seleccione un país" name="cod_pais"  required id="cod_pais">
@@ -208,7 +208,7 @@
                                             <input type="text" id="telefono" name="access_token_wsp" class="form-control form-control-lg input" placeholder="Access_Token_wsp" value="{{$configuraciones->access_token}}" required>
                                         <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
 
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="card-footer d-flex justify-content-end py-6 px-9" id="operaciones">

@@ -23,9 +23,8 @@ class ProductoController extends Controller
                 'data' => $view
             ]);
         }
-        $almacenes = Almacen::all();
         $categorias = Categoria::all();
-        return view('admin.producto.index', compact('productos','almacenes','categorias'));
+        return view('admin.producto.index', compact('productos','categorias'));
     }
     public function store(Request $request)
     {
@@ -38,8 +37,8 @@ class ProductoController extends Controller
                     'mensaje' => 'Codigo ya existe!'
                 ]);
             }
-            $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $request->diametro?? "", $request->longitud ?? "", $ruta, $request->categoria_id, $request->almacen_id);
+            $ruta = Helpers::guardarImagen($request, 'productos', 'imagen');
+            Producto::storeProducto($request->nombre, $request->codigo, $request->descripcion, $ruta, $request->categoria_id, 1, $request->price);
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),
@@ -53,7 +52,7 @@ class ProductoController extends Controller
     {
         try{
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Producto::updateProducto($request->id, $request->nombre, $request->descripcion, $ruta, $request->stock, $request->categoria_id, $request->almacen_id);
+            Producto::updateProducto($request->id, $request->nombre, $request->descripcion, $ruta, $request->categoria_id);
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),

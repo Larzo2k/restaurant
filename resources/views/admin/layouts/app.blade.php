@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 
 <html lang="es">
+
 <head>
     <base href="/">
-    @if ($configuracion->name !== "")
-        <title>{{$configuracion->name}}</title>
+    @if ($configuracion->name !== '')
+        <title>{{ $configuracion->name }}</title>
     @else
         <title>Codominio Onix</title>
     @endif
     <meta charset="utf-8" />
-    <meta name="description"
-        content="Sistema de gestion de condominios" />
-    <meta name="keywords"
-        content="Sistema de gestion de condominios" />
+    <meta name="description" content="Sistema de gestion de condominios" />
+    <meta name="keywords" content="Sistema de gestion de condominios" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:image" content="{{asset($configuracion->logotipo)}}">
+    <meta property="og:image" content="{{ asset($configuracion->logotipo) }}">
     <meta property="og:type" content="website" />
-    <meta property="og:title"
-        content="Sistema de gestion de condominios" />
-    <meta property="og:url" content="<?php URL()?>" />
+    <meta property="og:title" content="Sistema de gestion de condominios" />
+    <meta property="og:url" content="<?php URL(); ?>" />
     <meta property="og:site_name" content="Sistema de Gestión de Condominios" />
     <meta name="author" content="Desarrollamelo" />
 
-    
+
     <!-- ... otros elementos del head ... -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- ... otros elementos del head ... -->
@@ -33,15 +31,16 @@
 <!--end::Head-->
 <!--begin::Body-->
 
-<body id="kt_body"
-    class="header-fixed header-tablet-and-mobile-fixed  aside-enabled aside-fixed"
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed  aside-enabled aside-fixed"
     style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
     <!--begin::Main-->
     <!--begin::Root-->
 
-    <div class="page-loader flex-column" id="loading" style="background-color:rgba(0,0,0,0.39); justify-content: center; align-items: center; flex-flow: column; z-index: 1060;">
+    <div class="page-loader flex-column" id="loading"
+        style="background-color:rgba(0,0,0,0.39); justify-content: center; align-items: center; flex-flow: column; z-index: 1060;">
         <span class="spinner-border text-primary" role="status"></span>
-        <span class="text-muted fs-6 fw-semibold mt-5" style="padding: 5px;border-radius: 30px 30px; background-color:black ;color: white">Cargando...</span>
+        <span class="text-muted fs-6 fw-semibold mt-5"
+            style="padding: 5px;border-radius: 30px 30px; background-color:black ;color: white">Cargando...</span>
     </div>
 
     <div class="d-flex flex-column flex-root">
@@ -78,12 +77,12 @@
                         <!--end::Aside mobile toggle-->
                         <!--begin::Mobile logo-->
                         <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-                            <a href="{{route('index')}}" class="d-lg-none">
-                                {{-- @if ($configuracion->logotipo!=="")
-                                    <img alt="Logo" src="{{$configuracion->logotipo}}" class="h-30px" />
-                                @else --}}
+                            <a href="{{ route('index') }}" class="d-lg-none">
+                                @if ($configuracion->logotipo !== '')
+                                    <img alt="Logo" src="{{ $configuracion->logotipo }}" class="h-30px" />
+                                @else
                                     <img alt="Logo" src="/metronic/assets/media/logos/logo-2.svg" class="h-30px" />
-                                {{-- @endif --}}
+                                @endif
                             </a>
                         </div>
                         <!--end::Mobile logo-->
@@ -119,9 +118,9 @@
                                         data-kt-menu-trigger="click" data-kt-menu-attach="parent"
                                         data-kt-menu-placement="bottom-end">
                                         <!--<img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />-->
-                                            {{-- @if (auth()->user()->imagen=="") --}}
-                                                <img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />  
-                                            {{-- @else
+                                        {{-- @if (auth()->user()->imagen == '') --}}
+                                        <img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />
+                                        {{-- @else
                                                 <img src="{{asset(auth()->user()->imagen)}}" alt="user" />
                                             @endif --}}
                                     </div>
@@ -133,8 +132,9 @@
                                             <div class="menu-content d-flex align-items-center px-3">
                                                 <!--begin::Avatar-->
                                                 <div class="symbol symbol-50px me-5">
-                                                     {{-- @if (auth()->user()->imagen=="") --}}
-                                                        <img src="/metronic/assets/media/avatars/300-1.jpg" alt="user" />  
+                                                    {{-- @if (auth()->user()->imagen == '') --}}
+                                                    <img src="/metronic/assets/media/avatars/300-1.jpg"
+                                                        alt="user" />
                                                     {{-- @else
                                                         <img src="{{asset(auth()->user()->imagen)}}" alt="user" />
                                                     @endif --}}
@@ -170,7 +170,7 @@
 
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-5">
-                                            <a href="{{route('logout')}}" class="menu-link px-5">Log out</a>
+                                            <a href="{{ route('logout') }}" class="menu-link px-5">Log out</a>
                                         </div>
                                         <!--end::Menu item-->
 
@@ -195,7 +195,7 @@
                     <div class="post d-flex flex-column-fluid" id="kt_post">
                         <!--begin::Container-->
                         <div id="kt_content_container" class="container-xxl">
-                           @yield('content')
+                            @yield('content')
                         </div>
                         <!--end::Container-->
                     </div>
@@ -210,19 +210,20 @@
                         <!--begin::Copyright-->
                         <div class="text-dark order-2 order-md-1">
                             <span class="text-muted fw-bold me-1">{{ date('Y') }}©</span>
-                            {{-- @if ($configuracion->nombre !== "")
+                            {{-- @if ($configuracion->nombre !== '')
                             <a href="https://www.facebook.com/p/Alves-Administraci%C3%B3n-E-Inversiones-SRL-100063593889714/" target="_blank" class="text-gray-800 text-hover-primary">
                                 {{$configuracion->nombre}}
                             </a>
                         @else --}}
-                            <a href="https://keenthemes.com" target="_blank" class="text-gray-800 text-hover-primary">
+                            <a href="https://keenthemes.com" target="_blank"
+                                class="text-gray-800 text-hover-primary">
                                 Nombre de la Empresa
                             </a>
-                        {{-- @endif --}}
+                            {{-- @endif --}}
                         </div>
                         <!--end::Copyright-->
                         <!--begin::Menu-->
-                      {{--   <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
+                        {{--   <ul class="menu menu-gray-600 menu-hover-primary fw-bold order-1">
                             <li class="menu-item">
                                 <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
                             </li>

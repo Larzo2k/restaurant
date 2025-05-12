@@ -20,9 +20,6 @@ class Configuration extends Model
     protected $fillable = [
         'id',
         'name',
-        'cod',
-        'telefono',
-        'access_token',
         'logotipo',
         'favicon',
         'image_login'
@@ -31,9 +28,6 @@ class Configuration extends Model
     {
         $configuraciones = Configuration::first();
         $configuraciones->name = $name;
-        $configuraciones->telefono = $telefono;
-        $configuraciones->cod = $cod;
-        $configuraciones->access_token = $access_token;
         if($logotipo != ""){
             $configuraciones->logotipo = $logotipo;
         }

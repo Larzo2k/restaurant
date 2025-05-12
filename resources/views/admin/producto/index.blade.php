@@ -169,7 +169,7 @@
           $('#productoFormEditar input[name="diametro"]').val(diametro);
           $('#productoFormEditar input[name="longitud"]').val(longitud);
           $('#productoFormEditar textarea[name="descripcion"]').val(descripcion);
-          $('#productoFormEditar input[name="precio"]').val(precio);
+          $('#productoFormEditar input[name="price"]').val(precio);
           $('#productoFormEditar input[name="stock"]').val(stock);
           $('#productoFormEditar input[name="codigo"]').val(codigo);
           $('#productoFormEditar select[name="almacen_id"]').val(wherehouse_id).change();

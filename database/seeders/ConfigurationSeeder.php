@@ -15,10 +15,7 @@ class ConfigurationSeeder extends Seeder
     {
         Configuration::create([
             'id' => Str::uuid()->toString(),
-            'name' => 'Todo Perno',
-            'cod' => '+591',
-            'telefono' => '70906491',
-            'access_token' => '',
+            'name' => 'Super Kjaras JUAN XXIII',
             'logotipo' => '',
             'favicon' => '',
             'image_login' => '',

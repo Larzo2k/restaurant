@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('configuration', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('logotipo');
-            $table->string('favicon');
-            $table->string('image_login');
-            $table->timestamps();
+        Schema::table('venta', function (Blueprint $table) {
+            $table->unsignedBigInteger('nro_recibo')->unique()->nullable()->after('id'); // Se llena luego
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('configuration');
+        Schema::table('venta', function (Blueprint $table) {
+            $table->dropColumn('nro_recibo');
+        });
     }
 };

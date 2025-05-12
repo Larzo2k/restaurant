@@ -7,11 +7,12 @@
     <div class="aside-logo flex-column-auto " id="kt_aside_logo">
         <!--begin::Logo-->
         <div class="aside-logo flex-column-auto d-flex align-items-center justify-content-center">
-            <a href="{{route('index')}}" class="d-flex justify-content-center">
-                @if ($configuracion->logotipo!="")
-                    <img alt="Logo" src="{{$configuracion->logotipo}}"class="h-50px logo" />                    
+            <a href="{{ route('index') }}" class="d-flex justify-content-center">
+                @if ($configuracion->logotipo != '')
+                    <img alt="Logo" src="{{ $configuracion->logotipo }}"class="h-50px logo" />
                 @else
-                    <img alt="Logo" src="/metronic8/demo1/assets/media/logos/default-dark.svg" width="80px" class="h-25px logo" /> 
+                    <img alt="Logo" src="{{ asset('/metronic/assets/media/logos/logo-2.svg') }}" width="80px"
+                        class="h-25px logo" />
                 @endif
             </a>
         </div>
@@ -102,14 +103,14 @@
                         <span class="menu-title">Clientes</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <a class="menu-link" href="{{ route('proveedor') }}">
                         <span class="menu-icon">
                             <i class="fa-regular fa-user"></i>
                         </span>
                         <span class="menu-title">Proveedor</span>
                     </a>
-                </div>
+                </div> --}}
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('categorias') }}">
                         <span class="menu-icon">
@@ -118,14 +119,14 @@
                         <span class="menu-title">categorias</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <a class="menu-link" href="{{ route('almacen') }}">
                         <span class="menu-icon">
                             <i class="fa fa-clipboard-list"></i>
                         </span>
                         <span class="menu-title">Almacen</span>
                     </a>
-                </div>
+                </div> --}}
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('productos') }}">
                         <span class="menu-icon">
@@ -135,11 +136,11 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route('compras') }}">
+                    <a class="menu-link" href="{{ route('daily_menus') }}">
                         <span class="menu-icon">
                             <i class="fa fa-shopping-bag"></i>
                         </span>
-                        <span class="menu-title">Compra</span>
+                        <span class="menu-title">Menu del dia</span>
                     </a>
                 </div>
                 <div class="menu-item">
@@ -150,11 +151,19 @@
                         <span class="menu-title">Venta</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('venta.history') }}">
+                        <span class="menu-icon">
+                            <i class="fa fa-money-bill-alt"></i> <!-- Billete -->
+                        </span>
+                        <span class="menu-title">Venta del dia</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>
         <!--end::Aside Menu-->
     </div>
-    
+
 </div>
 <!--end::Aside-->
