@@ -75,8 +75,8 @@
             <tbody>
                 @foreach ($venta->detalleVenta as $item)
                     <td>{{ $item->DailyMenuProduct->product->name }}</td>
-                    <td>{{ $item->DailyMenuProduct->product->price }}</td>
                     <td>{{ $item->cantidad }}</td>
+                    <td>{{ $item->DailyMenuProduct->product->price }}</td>
                     <td>{{ $item->subtotal }}</td>
                 @endforeach
             </tbody>
