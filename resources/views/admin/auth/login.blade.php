@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="es_ES" />
     @if ($configuracion->logotipo !== '')
-        <meta property="og:image" content="{{asset($configuracion->logotipo)}}">
+        <meta property="og:image" content="{{url($configuracion->logotipo)}}">
     @else
         <meta property="og:image" content="{{asset('logo/logo.jpeg')}}">
     @endif
