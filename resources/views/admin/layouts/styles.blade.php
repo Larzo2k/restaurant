@@ -2,7 +2,7 @@
 @if ($configuracion->logotipo!="")
   <link rel="shortcut icon" href="{{$configuracion->favicon}}" />
 @else
-  <link rel="shortcut icon" href="{/metronic/assets/media/logos/favicon.ico" />
+  <link rel="shortcut icon" href="{{asset('logo/logo.jpeg')}}" />
 @endif
 <!--begin::Fonts-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />

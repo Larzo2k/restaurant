@@ -3,11 +3,11 @@
 
 <head>
     <base href="/">
-    {{-- @if ($configuracion->nombre !== '')
+    @if ($configuracion->nombre !== '')
         <title>{{ $configuracion->nombre }}</title>
-    @else --}}
-        <title>Todo pernos</title>
-    {{-- @endif --}}
+    @else
+        <title>Kjaras</title>
+    @endif
 
     <meta charset="utf-8" />
     <meta name="description"
@@ -19,9 +19,9 @@
     {{-- <meta property="og:image" content="{{asset($configuracion->logotipo)}}"> --}}
     <meta property="og:type" content="website" />
     <meta property="og:title"
-        content="Sistema de gestion de condominios" />
+        content="Sistema de ventas" />
     <meta property="og:url" content="<?php URL()?>" />
-    <meta property="og:site_name" content="Sistema de Gestión de Condominios" />
+    <meta property="og:site_name" content="Sistema de ventas" />
     <meta name="author" content="Desarrollamelo" />
     @include('admin.layouts.styles')
 </head>
