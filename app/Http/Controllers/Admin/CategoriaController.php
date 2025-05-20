@@ -28,7 +28,7 @@ class CategoriaController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Categoria::listarView(),
-                'mensaje' => 'Cliente creado con exitosamente.'
+                'mensaje' => 'Categoria creado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
@@ -45,7 +45,7 @@ class CategoriaController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Categoria::listarView(),
-                'mensaje' => 'Cliente actualizado con exitosamente.'
+                'mensaje' => 'Categoria actualizado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
@@ -57,7 +57,7 @@ class CategoriaController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Categoria::listarView(),
-                'mensaje' => 'Cliente eliminado con exitosamente.'
+                'mensaje' => 'Categoria eliminado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);

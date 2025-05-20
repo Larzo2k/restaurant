@@ -82,4 +82,5 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
         Route::get('history', [VentaController::class, 'history'])->name('venta.history');
     });
     Route::get('prueba', [VentaController::class, 'prueba'])->name('prueba');
+    Route::get('prueba2', [VentaController::class, 'prueba2'])->name('prueba2');
 });

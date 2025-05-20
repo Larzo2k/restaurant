@@ -42,7 +42,7 @@ class ProductoController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),
-                'mensaje' => 'Cliente creado con exitosamente.'
+                'mensaje' => 'Producto creado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
@@ -56,7 +56,7 @@ class ProductoController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),
-                'mensaje' => 'Cliente actualizado con exitosamente.'
+                'mensaje' => 'Producto actualizado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
@@ -68,7 +68,7 @@ class ProductoController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Producto::listarView(),
-                'mensaje' => 'Cliente eliminado con exitosamente.'
+                'mensaje' => 'producto eliminado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);

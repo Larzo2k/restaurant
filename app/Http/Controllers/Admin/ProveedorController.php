@@ -63,7 +63,7 @@ class ProveedorController extends Controller
             return response()->json([
                 'codigo' => 0,
                 'data' => Proveedor::listarView(),
-                'mensaje' => 'Cliente eliminado con exitosamente.'
+                'mensaje' => 'Proveedor eliminado con exitosamente.'
             ]);
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);

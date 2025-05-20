@@ -69,6 +69,19 @@ class VentaController extends Controller
         $message = "hola, esta es una prueb para enviar mensajes sin jobs";
         DeloWass::enviarTexto('+59170906491', $message);
     }
+    public function prueba2(){
+        try{
+            $message = "hola, esta es una prueb para enviar mensajes sin jobs";
+            DeloWass::enviarTexto('+59170906491', $message);
+            return response()->json([
+                'codigo' => 0,
+                'data' => null,
+                'mensaje' => 'Venta creada con exitosamente.'
+            ]);
+        }catch (\Throwable $th) {
+            return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
+        }
+    }
     public function verifyStockProducto($productos){
         foreach ($productos as $producto) {
             $producto = Producto::with('dailyMenuProduct')->where('name', $producto['nombre'])->first();
