@@ -72,8 +72,8 @@ class VentaController extends Controller
     public function prueba2(){
         try{
             $message = "hola, esta es una prueb para enviar mensajes sin jobs";
-            DeloWass::enviarTexto('+59170906491', $message);
-            dd($message);
+            $response = DeloWass::enviarTexto('+59170906491', $message);
+            dd($response);
         }catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
         }
