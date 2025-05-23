@@ -36,6 +36,15 @@
                             <label for="apellido" class="form-label">Correo<span class="required"></span></label>
                             <input type="email" class="form-control form-control-sm " id="email" name="email" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">Password<span class="required"></span></label>
+                            <div class="position-relative">
+                                <input type="password" class="form-control form-control-sm pr-5" id="password_edit" name="password" required>
+                                <span class="position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;" onclick="togglePasswordEdit()">
+                                    <i class="fas fa-eye" id="eye-icon"></i>
+                                </span>
+                            </div>
+                        </div>
                         <div class="col-md-12 mb-5">
                             <label class="form-label">Imagen</label>
                             <div class="image-upload-wrap" id="image-upload-wrap2">

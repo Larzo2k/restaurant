@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Cliente extends Model
+class Cliente extends Authenticatable
 {
     use HasFactory;
     protected $primaryKey = 'id';
@@ -66,7 +68,7 @@ class Cliente extends Model
         $cliente->status = $status;
         $cliente->save();
     }
-    public static function updateCliente($id, $name, $apellido, $email, $cod_pais, $telefono, $imagen){
+    public static function updateCliente($id, $name, $apellido, $email, $cod_pais, $telefono, $imagen, $password){
         $cliente = self::find($id);
         $cliente->name = $name;
         $cliente->address = $apellido;
@@ -74,6 +76,7 @@ class Cliente extends Model
         $cliente->phone = $telefono;
         $cliente->cod = $cod_pais;
         $cliente->image = $imagen;
+        $cliente->password = Hash::make($password);
         $cliente->save();
     }
     public static function deleteCliente($id){

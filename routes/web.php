@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ConfiguracionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\ProveedorController;
+use App\Http\Controllers\Cliente\AuthController as ClienteAuthController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DailyMenuController;
 use App\Http\Controllers\VentaController;
@@ -83,4 +84,11 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
     });
     Route::get('prueba', [VentaController::class, 'prueba'])->name('prueba');
     Route::get('prueba2', [VentaController::class, 'prueba2'])->name('prueba2');
+});
+
+Route::get('login-cliente', [ClienteAuthController::class, 'showLogin'])->name('login');
+Route::post('auth-cliente', [ClienteAuthController::class, 'login'])->name('cliente.login.post');
+Route::get('logout-cliente', [ClienteAuthController::class, 'logout'])->name('logout');;
+Route::group(['prefix'=>'cliente', 'middleware' => ['auth']], function(){
+    
 });

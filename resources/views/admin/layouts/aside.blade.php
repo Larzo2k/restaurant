@@ -48,45 +48,6 @@
             <!--begin::Menu-->
             <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
                 id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-                {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion mb-1">
-                    <span class="menu-link">
-                        <span class="menu-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </span>
-                        <span class="menu-title">Gestión Administrativa</span>
-                        <span class="menu-arrow"></span>
-                    </span>
-                    <div class="menu-sub menu-sub-accordion">
-                            <div class="menu-item">
-                                <a class="menu-link"
-                                    href="#">
-                                    <span class="menu-icon">
-                                        <i class="fa-solid fa-building"></i>
-                                    </span>
-                                    <span class="menu-title">Condominios</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                            <a class="menu-link"
-                                href="#">
-                                <span class="menu-icon">
-                                    <i class="fa-solid fa-house-chimney"></i>
-                                </span>
-                                <span class="menu-title"> Unidades</span>
-                            </a>
-                        </div>
-                            <div class="menu-item">
-                                <a class="menu-link"
-                                    href="#">
-                                    <div class="menu-icon">
-                                        <i class="fa-solid fa-address-book"></i>
-                                    </div>
-                                    <span class="menu-title">Contactos</span>
-                                </a>
-                            </div>
-
-                    </div>
-                </div> --}}
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('configuration') }}">
                         <span class="menu-icon">
@@ -103,14 +64,6 @@
                         <span class="menu-title">Clientes</span>
                     </a>
                 </div>
-                {{-- <div class="menu-item">
-                    <a class="menu-link" href="{{ route('proveedor') }}">
-                        <span class="menu-icon">
-                            <i class="fa-regular fa-user"></i>
-                        </span>
-                        <span class="menu-title">Proveedor</span>
-                    </a>
-                </div> --}}
                 <div class="menu-item">
                     <a class="menu-link" href="{{ route('categorias') }}">
                         <span class="menu-icon">
@@ -120,14 +73,6 @@
                     </a>
                 </div>
                 {{-- <div class="menu-item">
-                    <a class="menu-link" href="{{ route('almacen') }}">
-                        <span class="menu-icon">
-                            <i class="fa fa-clipboard-list"></i>
-                        </span>
-                        <span class="menu-title">Almacen</span>
-                    </a>
-                </div> --}}
-                <div class="menu-item">
                     <a class="menu-link" href="{{ route('productos') }}">
                         <span class="menu-icon">
                             <i class="fa fa-cube"></i>
@@ -158,7 +103,39 @@
                         </span>
                         <span class="menu-title">Venta del dia</span>
                     </a>
-                </div>
+                </div> --}}
+                {{-- @role('Super-Admin') --}}
+                    {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion mb-1">
+                        <span class="menu-link">
+                            <span class="menu-icon">
+                                <i class="fas fa-user-cog"></i>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <span class="menu-title">Gestión de usuarios</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link {{ Str::is(['admin/usuarios'], request()->path()) ? 'active' : '' }}"
+                                    href="{{ url('admin/usuarios') }}">
+                                    <span class="menu-icon">
+                                        <i class="fa-solid fa-user"></i>
+                                    </span>
+                                    <span class="menu-title">Usuarios</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ Str::is(['admin/roles'], request()->path()) ? 'active' : '' }}"
+                                    href="{{ url('admin/roles') }}">
+                                    <span class="menu-icon">
+                                        <i class="fas fa-user-tag"></i>
+                                    </span>
+                                    <span class="menu-title">Roles</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div> --}}
+                {{-- @endrole --}}
             </div>
             <!--end::Menu-->
         </div>
