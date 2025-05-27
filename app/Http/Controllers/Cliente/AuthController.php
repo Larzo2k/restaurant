@@ -10,6 +10,9 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
+        if(Auth::guard('cliente')->check()) {
+            return redirect()->route('cliente.products.index');
+        }
         return view('cliente.auth.login');
     }
 
@@ -25,8 +28,9 @@ class AuthController extends Controller
             //         'redirect_url' => route('propietario.dashboard')
             //     ]);
             // }
-            dd("entro");
-            // return redirect()->route('propietario.dashboard');
+            // dd("entro");
+            // return view('cliente.products.index');
+            return redirect()->route('cliente.products.index');
         }
 
         if ($request->ajax()) {
@@ -41,6 +45,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::guard('cliente')->logout();
-        return redirect('propietario/login');
+        return redirect('login-cliente');
     }
 }
