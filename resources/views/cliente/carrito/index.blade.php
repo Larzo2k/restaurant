@@ -15,12 +15,13 @@
 @endsection
 @push('scripts')
   <script>
+      let carrito = [];
       document.addEventListener("DOMContentLoaded", function () {
           renderizarCarrito();
       });
 
       function renderizarCarrito() {
-          let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+          carrito = JSON.parse(localStorage.getItem('carrito')) || [];
           let container = document.getElementById('carrito-container');
           container.innerHTML = '';
 
@@ -89,11 +90,60 @@
           carrito.splice(index, 1);
           localStorage.setItem('carrito', JSON.stringify(carrito));
           renderizarCarrito();
+
       }
 
-      function checkout() {
-          alert('Gracias por tu compra. Procesando...');
-          // Aquí puedes enviar el carrito al backend o redirigir a una pasarela de pago.
+    //   function checkout() {
+    //       alert('Gracias por tu compra. Procesando...');
+    //       // Aquí puedes enviar el carrito al backend o redirigir a una pasarela de pago.
+    //   }
+      function checkout(){
+        if(carrito.length == 0){
+            Toast.fire({
+                icon: 'error',
+                title: 'El carrito esta vacio',
+            })
+            return;
+        }
+        Swal.fire({
+                title: '¿Estás seguro?',
+                html: `Esta acción completara la compra`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Completar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:`{{url('cliente/carrito/store')}}`,
+                        type: "POST",
+                        data:{
+                            carrito: carrito,
+                            total: document.getElementById('carrito-total').textContent,
+                            _token: "{{csrf_token()}}",
+                        },
+                        success:function(response){
+                            if(response.codigo == 0){
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: response.mensaje,
+                                });
+                                localStorage.removeItem('carrito');
+                                renderizarCarrito();
+                                window.location.href = "{{url('cliente/pedido')}}";
+                            }else{
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.mensaje,
+                                });
+                            }
+                        },
+                        error: function(err,err1,err2){
+
+                        }
+                    });
+                }
+            });
       }
   </script>
 @endpush

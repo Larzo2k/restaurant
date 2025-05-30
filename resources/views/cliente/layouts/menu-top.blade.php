@@ -11,8 +11,8 @@
 
     <!-- Condominios -->
     <div class="menu-item">
-        <a class="menu-link py-3" href="">
-            <span class="menu-title">Condominios</span>
+        <a class="menu-link py-3" href="{{ route('cliente.pedido.index') }}">
+            <span class="menu-title">Pedidos</span>
         </a>
     </div>
 

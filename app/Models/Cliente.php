@@ -56,7 +56,7 @@ class Cliente extends Authenticatable
         $view = view('admin.cliente.table', compact('clientes', 'paises'))->render();
         return $view;
     }
-    public static function storeCliente($name, $apellido, $email, $cod_pais, $telefono, $imagen, $status = self::ESTADO_ACTIVO){
+    public static function storeCliente($name, $apellido, $email, $cod_pais, $telefono, $imagen, $password, $status = self::ESTADO_ACTIVO){
         $cliente = new self();
         $cliente->id = Str::uuid();
         $cliente->name = $name;
@@ -65,6 +65,7 @@ class Cliente extends Authenticatable
         $cliente->phone = $telefono;
         $cliente->cod = $cod_pais;
         $cliente->image = $imagen;
+        $cliente->password = Hash::make($password);
         $cliente->status = $status;
         $cliente->save();
     }

@@ -29,7 +29,7 @@ class ClienteController extends Controller
     {
         try{
             $ruta = Helpers::guardarImagen($request, 'clientes', 'imagen');
-            Cliente::storeCliente($request->nombre, $request->apellido, $request->email, $request->cod_pais, $request->telefono, $ruta);
+            Cliente::storeCliente($request->nombre, $request->apellido, $request->email, $request->cod_pais, $request->telefono, $ruta, $request->password);
             return response()->json([
                 'codigo' => 0,
                 'data' => Cliente::listarView(),

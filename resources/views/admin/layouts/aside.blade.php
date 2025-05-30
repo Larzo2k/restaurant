@@ -72,7 +72,7 @@
                         <span class="menu-title">categorias</span>
                     </a>
                 </div>
-                {{-- <div class="menu-item">
+                <div class="menu-item">
                     <a class="menu-link" href="{{ route('productos') }}">
                         <span class="menu-icon">
                             <i class="fa fa-cube"></i>
@@ -103,7 +103,7 @@
                         </span>
                         <span class="menu-title">Venta del dia</span>
                     </a>
-                </div> --}}
+                </div>
                 {{-- @role('Super-Admin') --}}
                     {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion mb-1">
                         <span class="menu-link">

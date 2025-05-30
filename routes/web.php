@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\ProveedorController;
 use App\Http\Controllers\Cliente\AuthController as ClienteAuthController;
 use App\Http\Controllers\Cliente\CarritoController;
+use App\Http\Controllers\Cliente\PedidoController;
 use App\Http\Controllers\Cliente\ProductController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DailyMenuController;
@@ -94,6 +95,9 @@ Route::get('logout-cliente', [ClienteAuthController::class, 'logout'])->name('cl
 Route::group(['prefix'=>'cliente', 'middleware' => ['auth:cliente']], function(){
     Route::get('products', [ProductController::class, 'index'])->name('cliente.products.index');
     Route::get('carrito', [CarritoController::class, 'index'])->name('cliente.products.carrito');
+    Route::post('carrito/store', [CarritoController::class, 'store'])->name('cliente.products.store');
+    Route::get('pedido', [PedidoController::class, 'index'])->name('cliente.pedido.index');
+    Route::get('pedido/pdf/{id}', [PedidoController::class, 'getPdf'])->name('cliente.pedido.pdf');
     // Route::get('add-to-carrito/{id}', [ProductController::class, 'addToCarrito'])->name('cliente.products.addToCarrito');
     // Route::get('delete-from-carrito/{id}', [ProductController::class, 'deleteFromCarrito'])->name('cliente.products.deleteFromCarrito');
     // Route::get('comprar', [CompraController::class, 'index'])->name('cliente.comprar.index');
