@@ -11,8 +11,8 @@
                     <th class="sorting_disabled" rowspan="1" colspan="1">Fecha</th>
                     <th class="sorting_disabled text-center" rowspan="1" colspan="1">
                         Monto</th>
-                    {{-- <th class="sorting_disabled" rowspan="1" colspan="1">
-                        Cliente</th> --}}
+                    <th class="sorting_disabled" rowspan="1" colspan="1">
+                        Estado</th>
                     <th class="min-w-70px text-end sorting_disabled" rowspan="1" colspan="1">
                         Opciones</th>
                 </tr>
@@ -31,18 +31,53 @@
                             Bs. {{ number_format($item->total, 2, ',', '.') }}
                         </span>
                     </td>
+                    <td class="text-center">
+                      @switch($item->is_pago)
+                          @case(1)
+                            <span class="badge bg-success rounded-pill px-3 py-2">
+                                PAGADO
+                            </span>
+                              @break
+                          @case(0)
+                            <span class="badge bg-danger rounded-pill px-3 py-2">
+                                No PAGADO
+                            </span>
+                              @break
+                          @default
+                              
+                      @endswitch
+                    </td>
                     <td class="text-end">
-                        <a href="{{ route('cliente.pedido.pdf', $item->id) }}"
-                            class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
-                            data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
-                            data-bs-original-title="Ver pdf">
-                            <i class="fa-solid fa-file-pdf"></i>
-                        </a>
+                        @switch($item->is_pago)
+                            @case(1)
+                              <a href="{{ route('cliente.pedido.pdf', $item->id) }}"
+                                class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
+                                data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
+                                data-bs-original-title="Ver pdf">
+                                  <i class="fa-solid fa-file-pdf"></i>
+                              </a>
+                                @break
+                            @case(0)
+                              <a href="{{ route('cliente.pedido.pdf', $item->id) }}"
+                                class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
+                                data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
+                                data-bs-original-title="Ver pdf">
+                                  ver qr
+                              </a>
+                              <a href="{{ route('cliente.pedido.pdf', $item->id) }}"
+                                class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
+                                data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
+                                data-bs-original-title="Ver pdf">
+                                  Cancelar pedido
+                              </a>
+                                @break
+                            @default
+                        @endswitch
                     </td>
                 </tr>
             @empty
                 <tr class="odd">
-                    <td colspan="3"> No se encontraron datos</td>
+                    <td colspan="3"> No hay pedidos</td>
                 </tr>
             @endforelse
               </tbody>

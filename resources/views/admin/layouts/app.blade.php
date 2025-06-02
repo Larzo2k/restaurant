@@ -42,6 +42,25 @@
         <span class="text-muted fs-6 fw-semibold mt-5"
             style="padding: 5px;border-radius: 30px 30px; background-color:black ;color: white">Cargando...</span>
     </div>
+    {{-- <div class="page-loader flex-column" id="loadingAnimated"
+        style="background-color:rgba(0,0,0,0.39); justify-content: center; align-items: center; flex-flow: column; z-index: 1060;">
+        <span class="spinner-border text-primary" role="status"></span>
+        <span class="text-muted fs-6 fw-semibold mt-5"
+            style="padding: 5px;border-radius: 30px 30px; background-color:black ;color: white">Cargando...</span>
+    </div> --}}
+    <div class="page-loader flex-column" id="loadingAnimated"
+    style="display: none; background-color:rgba(0,0,0,0.39); justify-content: center; align-items: center; flex-flow: column; z-index: 1060; position: fixed; top: 0; left: 0; width: 100%; height: 100%;">
+        
+        <!-- Aquí irá la animación SVG -->
+        <div id="lottieLoader" style="width: 150px; height: 150px;"></div>
+
+        <!-- Texto opcional debajo -->
+        <span class="text-muted fs-6 fw-semibold mt-5"
+            style="padding: 5px; border-radius: 30px 30px; background-color:black; color: white;">
+            Cargando...
+        </span>
+    </div>
+
 
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->

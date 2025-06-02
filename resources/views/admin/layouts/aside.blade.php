@@ -104,6 +104,14 @@
                         <span class="menu-title">Venta del dia</span>
                     </a>
                 </div>
+                <div class="menu-item">
+                    <a class="menu-link" href="{{ route('admin.pedido.index') }}">
+                        <span class="menu-icon">
+                            <i class="fa fa-money-bill-alt"></i> <!-- Billete -->
+                        </span>
+                        <span class="menu-title">Pedidos</span>
+                    </a>
+                </div>
                 {{-- @role('Super-Admin') --}}
                     {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion mb-1">
                         <span class="menu-link">

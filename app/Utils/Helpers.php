@@ -60,4 +60,16 @@ class Helpers
 
         return $path;
     }
+    public static function saveFileFromBase64(String $base64File, String $folder)
+    {
+        $dataInfo = explode(";base64,", $base64File);
+        $dataExt = str_replace('data:image/', '', $dataInfo[0]);
+        $dataFile = str_replace(' ', '+', $dataInfo[1]);
+        $image = base64_decode($dataFile);
+
+        $nombre = $folder . '/' . uniqid() . '.' . $dataExt;
+        Storage::disk('public')->put($nombre, $image);
+        $path = "storage/" . $nombre;
+        return $path;
+    }
 }

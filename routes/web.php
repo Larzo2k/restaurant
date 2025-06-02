@@ -6,12 +6,14 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\ConfiguracionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PedidoController as AdminPedidoController;
 use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\ProveedorController;
 use App\Http\Controllers\Cliente\AuthController as ClienteAuthController;
 use App\Http\Controllers\Cliente\CarritoController;
 use App\Http\Controllers\Cliente\PedidoController;
 use App\Http\Controllers\Cliente\ProductController;
+use App\Http\Controllers\Cliente\QrController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DailyMenuController;
 use App\Http\Controllers\VentaController;
@@ -85,6 +87,8 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
         Route::get('pdf/{id}', [VentaController::class, 'getPdf'])->name('venta.pdf');
         Route::get('history', [VentaController::class, 'history'])->name('venta.history');
     });
+    Route::get('pedido', [AdminPedidoController::class, 'index'])->name('admin.pedido.index');
+
     Route::get('prueba', [VentaController::class, 'prueba'])->name('prueba');
     Route::get('prueba2', [VentaController::class, 'prueba2'])->name('prueba2');
 });
@@ -98,6 +102,8 @@ Route::group(['prefix'=>'cliente', 'middleware' => ['auth:cliente']], function()
     Route::post('carrito/store', [CarritoController::class, 'store'])->name('cliente.products.store');
     Route::get('pedido', [PedidoController::class, 'index'])->name('cliente.pedido.index');
     Route::get('pedido/pdf/{id}', [PedidoController::class, 'getPdf'])->name('cliente.pedido.pdf');
+    Route::post('generate-qr', [QrController::class, 'generateQr'])->name('generateQr');
+    Route::post('/pedido/verify-payment', [QrController::class, 'verifyPayment'])->name('cliente.qr.verifyPayment');
     // Route::get('add-to-carrito/{id}', [ProductController::class, 'addToCarrito'])->name('cliente.products.addToCarrito');
     // Route::get('delete-from-carrito/{id}', [ProductController::class, 'deleteFromCarrito'])->name('cliente.products.deleteFromCarrito');
     // Route::get('comprar', [CompraController::class, 'index'])->name('cliente.comprar.index');

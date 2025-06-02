@@ -26,6 +26,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
 <!--Excel-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
+{{-- Animate loading menu --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
 <!--end::Javascript-->
 <script>
     $(document).ready(function() {
@@ -34,7 +37,25 @@
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+        // LoadingAnimado();
     });
+    function LoadingAnimado() {
+        console.log('Cargando animacion');
+        $('#loadingAnimated').css('display', 'flex'); // Mostrar overlay
+        lottie.loadAnimation({
+            container: document.getElementById('lottieLoader'), // Contenedor de la animación
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '/animate/menuAnimate.json' // Ruta al archivo JSON de tu animación Lottie
+        });
+    }
+
+    function LoadingAnimadoHiden() {
+        console.log('Ocultando animacion');
+        $('#loadingAnimated').css('display', 'none');
+        $('#lottieLoader').html(''); // Limpiar el contenedor para que no se duplique si vuelves a cargar
+    }
 
     const Toast = Swal.mixin({
         toast: true,

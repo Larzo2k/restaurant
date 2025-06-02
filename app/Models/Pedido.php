@@ -23,6 +23,7 @@ class Pedido extends Model
         'customer_id',
         'status',
         'nro_recibo',
+        'is_pago',
     ];
     const ESTADO_ACTIVO = 1;
     const ESTADO_INACTIVO = 0;
