@@ -102,8 +102,10 @@ Route::group(['prefix'=>'cliente', 'middleware' => ['auth:cliente']], function()
     Route::post('carrito/store', [CarritoController::class, 'store'])->name('cliente.products.store');
     Route::get('pedido', [PedidoController::class, 'index'])->name('cliente.pedido.index');
     Route::get('pedido/pdf/{id}', [PedidoController::class, 'getPdf'])->name('cliente.pedido.pdf');
+    Route::post('pedido/cancel/{id}', [PedidoController::class, 'cancel'])->name('cliente.pedido.cnacel');
     Route::post('generate-qr', [QrController::class, 'generateQr'])->name('generateQr');
     Route::post('/pedido/verify-payment', [QrController::class, 'verifyPayment'])->name('cliente.qr.verifyPayment');
+
     // Route::get('add-to-carrito/{id}', [ProductController::class, 'addToCarrito'])->name('cliente.products.addToCarrito');
     // Route::get('delete-from-carrito/{id}', [ProductController::class, 'deleteFromCarrito'])->name('cliente.products.deleteFromCarrito');
     // Route::get('comprar', [CompraController::class, 'index'])->name('cliente.comprar.index');

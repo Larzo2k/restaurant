@@ -26,4 +26,19 @@ class PedidoController extends Controller
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
         }
     }
+    public function cancel($pedido_id)
+    {
+        try {
+            $pedido = Pedido::findOrfail($pedido_id);
+            $pedido->status = Pedido::ESTADO_INACTIVO;
+            $pedido->update();
+            $user_id = auth()->user()->id;
+            $pedidos = Pedido::getAllPedidosUser($user_id);
+            $view =  view('cliente.pedidos.index', compact('pedidos'))->render();
+            return response()->json(["codigo" => 0, 'mensaje' => 'Pedido cancelado', "data" => $view]);
+            
+        } catch (\Throwable $th) {
+            return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
+        }
+    }
 }

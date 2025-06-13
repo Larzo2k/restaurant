@@ -32,4 +32,57 @@
   </div>
   <!--end::Card body-->
 </div>
+    @include('cliente.carrito.modal.qr')
 @endsection
+
+@push('scripts')
+    <script>
+        function verQr(url){
+            let ruta = url;
+            $('#loadingQrModalVerificar').show();
+            $('#modalQr').modal('show');
+            let imageWrapper = $('#profileImage .image-input-wrapper');
+            imageWrapper.css('background-image', `url(${ruta})`);
+            imageWrapper.css('background-size', 'cover'); // Ajusta el tamaño
+            imageWrapper.css('background-position', 'center'); // Centra la imagen
+        }
+        function cancelarPedido(id){
+            Swal.fire({
+                title: '¿Estás seguro?',
+                html: `Esta acción cancelara el pedido`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Cancelar pedido',
+                cancelButtonText: 'Cerrar modal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:`{{url('cliente/pedido/cancel')}}/`+id,
+                        type: "POST",
+                        data:{
+                            id_directivo: id,
+                            _token: "{{csrf_token()}}",
+                        },
+                        success:function(response){
+                            if(response.codigo == 0){
+                                $('#table').html(response.data);
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: response.mensaje,
+                                });
+                            }else{
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: response.mensaje,
+                                });
+                            }
+                        },
+                        error: function(err,err1,err2){
+
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+@endpush

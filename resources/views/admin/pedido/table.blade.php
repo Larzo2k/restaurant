@@ -23,7 +23,7 @@
                   @forelse ($pedidos as $item)
                       <tr class="odd">
                           <td class="col-1">{{ $loop->iteration }}</td>
-                          <td>{{ $item->total }}</td>
+                          <td><span class="badge bg-success rounded-pill px-3 py-2">Bs. {{ number_format($item->total, 2, ',', '.') }}</span></td>
                           <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('es')->translatedFormat('l, d F Y') }}</td>
                           <td>@switch($item->is_pago)
                               @case(1)

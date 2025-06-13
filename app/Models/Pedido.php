@@ -58,8 +58,12 @@ class Pedido extends Model
     {
         return $this->hasMany(DetallePedido::class, 'pedido_id', 'id');
     }
+    public function payment()
+    {
+        return $this->hasOne(Payment::class, 'pedido_id', 'id');
+    }
     public static function getAllPedidosUser($user_id){
-        $pedidos = Pedido::where('customer_id', $user_id)->get();
+        $pedidos = Pedido::with('payment')->where('customer_id', $user_id)->where('status', self::ESTADO_ACTIVO)->get();
         return $pedidos;
     }
 }
