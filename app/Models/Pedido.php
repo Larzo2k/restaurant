@@ -27,6 +27,7 @@ class Pedido extends Model
     ];
     const ESTADO_ACTIVO = 1;
     const ESTADO_INACTIVO = 0;
+    public const TIEMPO_CANCELACION = 5;
     public static function storePedido($user_id, $fecha, $total){
         $pedido = new Pedido();
         $pedido->id = Str::uuid();

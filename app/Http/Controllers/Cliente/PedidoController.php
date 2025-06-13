@@ -29,6 +29,9 @@ class PedidoController extends Controller
     public function cancel($pedido_id)
     {
         try {
+            if(self::verifyCancelpedido($pedido_id) == false){
+                return response()->json(["codigo" => 1, 'mensaje' => 'No puedes cancelar este pedido. exceediste el tiempo de cancelacion', "data" => null]);
+            }
             $pedido = Pedido::findOrfail($pedido_id);
             $pedido->status = Pedido::ESTADO_INACTIVO;
             $pedido->update();
@@ -40,5 +43,12 @@ class PedidoController extends Controller
         } catch (\Throwable $th) {
             return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
         }
+    }
+    public function verifyCancelpedido($pedido_id){
+        $pedido = Pedido::findOrfail($pedido_id);
+        if($pedido->created_at->diffInMinutes(now()) < Pedido::TIEMPO_CANCELACION){
+            return true;
+        }
+        return false;
     }
 }
