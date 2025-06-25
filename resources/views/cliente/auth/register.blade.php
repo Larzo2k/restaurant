@@ -3,11 +3,11 @@
 
 <head>
     <base href="/">
-    @if ($configuracion->nombre !== '')
+    {{-- @if ($configuracion->nombre !== '')
         <title>{{ $configuracion->nombre }}</title>
-    @else
-        <title>Kjaras</title>
-    @endif
+    @else --}}
+        <title>Sistema condominio</title>
+    {{-- @endif --}}
 
     <meta charset="utf-8" />
     <meta name="description"
@@ -16,18 +16,19 @@
         content="Sistema de gestion de condominios" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:locale" content="es_ES" />
-    @if ($configuracion->logotipo !== '')
-        <meta property="og:image" content="{{asset($configuracion->logotipo)}}">
-    @else
-        <meta property="og:image" content="{{asset('logo/logo.jpeg')}}">
-    @endif
+    <meta property="og:image" content="{{asset($configuracion->logotipo)}}">
     <meta property="og:type" content="website" />
     <meta property="og:title"
-        content="Sistema de ventas" />
+        content="Sistema de gestion de condominios" />
     <meta property="og:url" content="<?php URL()?>" />
-    <meta property="og:site_name" content="Sistema de ventas" />
+    <meta property="og:site_name" content="Sistema de Gestión de Condominios" />
     <meta name="author" content="Desarrollamelo" />
     @include('admin.layouts.styles')
+    <style>
+      .col-md-6{
+        margin-top: 10px;
+      }
+    </style>
 </head>
 
 <body id="kt_body" class="bg-body">
@@ -38,28 +39,31 @@
                 <div class="d-flex flex-center flex-column flex-lg-row-fluid">
                     <div class="w-lg-500px p-10">
 
-                        <form class="form w-100" action="{{ route('auth') }}" method="POST">
+                        <form class="form w-100"  action="{{ route('cliente.register.post') }}"  method="POST">
                             @csrf
                             <div class="text-center mb-11">
                                 <h1 class="text-dark fw-bolder mb-3">
-                                    Inicio de sesión
+                                    Registrar cuenta
                                 </h1>
+                                <h3 class="text-dark fw-bolder mb-3">
+                                    Cliente
+                                </h3>
 
                             </div>
 
-                            <div class="fv-row mb-8">
-                                <input type="email" placeholder="Email" name="email"
+                            {{-- <div class="fv-row mb-8">
+                                <input type="email" placeholder="Email" name="email"  
                                     class="form-control bg-transparent" value="{{ old('email') }}" required />
-                            </div>
+                            </div> --}}
 
-                            <div class="fv-row mb-5 position-relative">
+                            {{-- <div class="fv-row mb-5 position-relative">
                                 <input type="password" id="passwordField" placeholder="Password" name="password"
                                     class="form-control bg-transparent" required />
                                 <i id="togglePassword"
                                     class="fas fa-eye-slash position-absolute top-50 end-0 translate-middle-y pe-3 cursor-pointer"></i>
-                            </div>
+                            </div> --}}
 
-                            @error('error')
+                            {{-- @error('error')
                                 <div class="fv-row mb-5">
                                     <div class="alert alert-danger d-flex justify-content-center align-items-center"
                                         role="alert">
@@ -79,14 +83,55 @@
                                         </div>
                                     </div>
                                 </div>
-                            @enderror
+                            @enderror --}}
+                            <div class="row">
+                              <div class="col col-md-6">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input type="text" placeholder="Nombre" name="nombre"  
+                                  class="form-control bg-transparent" value="{{ old('name') }}" required />
+                              </div>
+                              <div class="col col-md-6">
+                                <label for="name" class="form-label">Apellido</label>
+                                <input type="text" placeholder="Apellido" name="addres"  
+                                  class="form-control bg-transparent" value="{{ old('addres') }}" required />
+                              </div>
+                              <div class="col col-md-6">
+                                <label for="cod_pais" class="form-label">Código de país<span class="required"></span></label>
+                                  <select class="form-select form-select-sm" data-control="select2" data-placeholder="Seleccione un pais" name="cod_pais" required>
+                                      <option value=""></option>
+                                      @forelse ($paises as $pais)
+                                          <option value="{{ $pais->dial_code }}"> {{ $pais->name }}</option>
+                                      @empty
+                                      @endforelse
+                                  </select>
+                              </div>
+                              <div class="col col-md-6">
+                                <label for="name" class="form-label">Telefono</label>
+                                <input type="number" placeholder="Telefono" name="phone"  
+                                  class="form-control bg-transparent" value="{{ old('phone') }}" required />
+                              </div>
+                              <div class="col col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" placeholder="Email" name="email"  
+                                  class="form-control bg-transparent" value="{{ old('email') }}" required />
+                                  @error('email')
+                                    <div class="text-danger mt-1">{{ $message }}</div>
+                                  @enderror
+                              </div>
+                              <div class="col col-md-6 fv-row position-relative">
+                                <label for="email" class="form-label">Password</label>
+                                <input type="password" id="passwordField" placeholder="Password" name="password"
+                                class="form-control bg-transparent" required />
+                                <i id="togglePassword" class="fas fa-eye-slash position-absolute top-50 end-0 translate-middle-y pe-3 cursor-pointer"></i>
+                              </div>
+                            </div>
 
 
-                            <div class="d-grid mb-10">
+                            <div class="d-grid mb-10 mt-10">
                                 <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
 
                                     <span class="indicator-label">
-                                        Sign In</span>
+                                        Crear cuenta</span>
 
                                     <span class="indicator-progress">
                                         Please wait... <span
@@ -95,7 +140,7 @@
                                 </button>
                             </div>
                             <a href="{{ route('login') }}" class="link-primary fs-6 fw-bolder">
-                                Eres cliente?
+                                Ya tienes una cuenta?
                             </a>
                         </form>
                     </div>
@@ -106,7 +151,7 @@
             <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
                 style="background-image: url(https://preview.keenthemes.com/metronic8/demo1/assets/media/misc/auth-bg.png)">
                 <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
-                    <a href="#" class="mb-0 mb-lg-12">
+                    <a href="{{ route('login') }}" class="mb-0 mb-lg-12">
                         @if ($configuracion->logotipo !== '')
                             <img alt="Logo" src="{{ $configuracion->logotipo }}" class="h-60px h-lg-75px" />
                         @else
@@ -115,9 +160,9 @@
                         @endif
                     </a>
 
-                    @if ($configuracion->image_login !== '')
+                    @if ($configuracion->imagen_login !== '')
                         <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
-                            style="margin-top: -30px" src="{{ $configuracion->image_login }}" alt="" />
+                            style="margin-top: -30px" src="{{ $configuracion->imagen_login }}" alt="" />
                     @else
                         <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
                             style="margin-top: -30px"
@@ -127,29 +172,36 @@
 
                     <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7"
                         style="margin-top: -30px">
-                        {{ $configuracion->name }}
+                        {{ $configuracion->nombre }}
                     </h1>
 
                     <div class="d-none d-lg-block text-white fs-base text-center">
-                        Tu lugar de confianza.
+                        In this kind of post, <a href="#" class="AA5-hover text-warning fw-bold me-1">the
+                            blogger</a>
+
+                        introduces a person they’ve intervieA<br /> and provides some background information about
+
+                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the interviewee</a>
+                        and their <br /> work following this is a transcript of the interview.
                     </div>
                 </div>
             </div>
         </div>
-        @include('admin.layouts.scripts')
+    @include('admin.layouts.scripts')
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                ocultarOMostrarPassword();
-                const form = document.querySelector('.form');
-                const submitButton = document.querySelector('#kt_sign_in_submit');
-            
-                form.addEventListener('submit', function () {
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = 'Processing...';
-                });
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            ocultarOMostrarPassword();
+            const form = document.querySelector('.form');
+            const submitButton = document.querySelector('#kt_sign_in_submit');
+        
+            form.addEventListener('submit', function () {
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'Processing...';
             });
-            </script>
+        });
+
+    </script>
 </body>
 
 </html>

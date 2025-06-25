@@ -93,6 +93,9 @@
                                     </span>
                                 </button>
                             </div>
+                            <a href="{{ route('cliente.register.get') }}" class="link-primary fs-6 fw-bolder">
+                                Crear cuenta?
+                            </a>
                         </form>
                     </div>
                 </div>

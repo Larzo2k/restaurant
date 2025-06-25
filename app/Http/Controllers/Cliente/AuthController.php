@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class AuthController extends Controller
 {
@@ -46,5 +48,33 @@ class AuthController extends Controller
     {
         Auth::guard('cliente')->logout();
         return redirect('login-cliente');
+    }
+    public function register()
+    {
+        $json_paises = File::get(base_path() . '/database/data/paises.json');
+        $paises = json_decode($json_paises);
+        return view('cliente.auth.register', compact('paises'));
+    }
+    public function registerCliente(Request $request)
+    {
+        try{
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'addres' => 'required|string|max:255',
+                'cod_pais' => 'required',
+                'phone' => 'required|numeric',
+                'email' => 'required|email|unique:customer,email', // Asegura que el email no esté repetido
+                'password' => 'required|min:6',
+            ]);
+            $ruta = '';
+            $cliente = Cliente::storeCliente($request->nombre, $request->addres, $request->email, $request->cod_pais, $request->phone, $ruta, $request->password);
+            Auth::guard('cliente')->login($cliente);
+
+            // Redirigir a su dashboard
+            return redirect()->route('cliente.products.index');
+
+        } catch (\Throwable $th) {
+            return response()->json(["codigo" => 1, 'mensaje' => $th->getMessage(), "data" => null]);
+        }
     }
 }

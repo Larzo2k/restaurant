@@ -68,6 +68,7 @@ class Cliente extends Authenticatable
         $cliente->password = Hash::make($password);
         $cliente->status = $status;
         $cliente->save();
+        return $cliente;
     }
     public static function updateCliente($id, $name, $apellido, $email, $cod_pais, $telefono, $imagen, $password){
         $cliente = self::find($id);

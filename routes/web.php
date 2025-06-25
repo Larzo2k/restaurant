@@ -95,7 +95,11 @@ Route::group(['prefix'=>'admin','middleware' => ['auth']], function(){
 
 Route::get('login-cliente', [ClienteAuthController::class, 'showLogin'])->name('login');
 Route::post('auth-cliente', [ClienteAuthController::class, 'login'])->name('cliente.login.post');
-Route::get('logout-cliente', [ClienteAuthController::class, 'logout'])->name('cliente.logout');;
+Route::get('logout-cliente', [ClienteAuthController::class, 'logout'])->name('cliente.logout');
+//crear cuenta
+Route::get('register-cliente', [ClienteAuthController::class, 'register'])->name('cliente.register.get');
+Route::post('register-cliente', [ClienteAuthController::class, 'registerCliente'])->name('cliente.register.post');
+
 Route::group(['prefix'=>'cliente', 'middleware' => ['auth:cliente']], function(){
     Route::get('products', [ProductController::class, 'index'])->name('cliente.products.index');
     Route::get('carrito', [CarritoController::class, 'index'])->name('cliente.products.carrito');
