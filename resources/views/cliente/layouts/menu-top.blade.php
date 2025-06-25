@@ -17,11 +17,11 @@
     </div>
 
     <!-- Gastos -->
-    <div class="menu-item">
+    {{-- <div class="menu-item">
         <a class="menu-link py-3" href="">
             <span class="menu-title">Gastos</span>
         </a>
-    </div>
+    </div> --}}
 
     <div class="menu-item position-relative">
         <a class="menu-link py-3" href="{{ route('cliente.products.carrito') }}">
