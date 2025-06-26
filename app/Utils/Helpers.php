@@ -109,9 +109,10 @@ class Helpers
 
             // Obtener la URL
             $url = Storage::disk('s3')->url($path);
-            return response()->json([
-                'url' => $url,
-            ]);
+            return $url;
+            // return response()->json([
+            //     'url' => $url,
+            // ]);
         }
 
         return response()->json(['error' => 'No se subió ninguna imagen'], 400);
