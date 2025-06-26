@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('cod');
             $table->string('phone');
-            $table->string('image')->default('');
+            $table->text('image')->default('');
             $table->tinyInteger('status')->default(1)->comment('1=Activo, 0=Inactivo');
             $table->timestamps();
         });

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('cod');
             $table->string('cod_barra')->default('');
             $table->string('description');
-            $table->string('image')->default('');
+            $table->text('image')->default('');
             $table->integer('stock')->default(0);
             $table->double('price');
             $table->uuid('category_id');

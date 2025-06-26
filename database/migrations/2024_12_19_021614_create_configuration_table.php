@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('configuration', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('logotipo');
-            $table->string('favicon');
-            $table->string('image_login');
+            $table->text('name');
+            $table->text('logotipo');
+            $table->text('favicon');
+            $table->text('image_login');
             $table->timestamps();
         });
     }

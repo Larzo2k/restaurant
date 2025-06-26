@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('pedido_id');
             $table->foreign('pedido_id')->references('id')->on('pedido');
-            $table->string('path_qr');
-            $table->string('data');
+            $table->text('path_qr');
+            $table->text('data');
             $table->string('movement_id');
             $table->timestamps();
         });
