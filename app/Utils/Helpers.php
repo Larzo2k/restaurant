@@ -99,7 +99,7 @@ class Helpers
 
     //     return Storage::disk('bucket')->url("$folder/$nombre");
     // }
-    public function guardarImagen(Request $request)
+    public static function guardarImagen(Request $request)
     {
         if ($request->hasFile('imagen')) {
             $path = $request->file('imagen')->store('imagenes', 's3');
