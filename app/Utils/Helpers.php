@@ -108,7 +108,7 @@ class Helpers
             Storage::disk('s3')->setVisibility($path, 'public');
 
             // Obtener la URL
-            $url = Storage::disk('s3')->url($path);
+            $$url = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $path;
             return $url;
             // return response()->json([
             //     'url' => $url,
