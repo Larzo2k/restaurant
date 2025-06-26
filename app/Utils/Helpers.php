@@ -80,24 +80,42 @@ class Helpers
 
     //     return $url;
     // }
-    public static function guardarImagen(Request $request, $folder, $field_name)
+    // public static function guardarImagen(Request $request, $folder, $field_name)
+    // {
+    //     if (!$request->hasFile($field_name)) {
+    //         return '';
+    //     }
+
+    //     $file = $request->file($field_name);
+    //     $extension = $file->extension();
+
+    //     if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
+    //         throw new \Exception("Solo se acepta png, jpg, jpeg");
+    //     }
+
+    //     $nombre = \Str::uuid() . '.' . $extension;
+
+    //     Storage::disk('bucket')->putFileAs($folder, $file, $nombre, 'public');
+
+    //     return Storage::disk('bucket')->url("$folder/$nombre");
+    // }
+    public function guardarImagen(Request $request)
     {
-        if (!$request->hasFile($field_name)) {
-            return '';
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('imagenes', 's3');
+
+            // Hacerla pública (si quieres)
+            Storage::disk('s3')->setVisibility($path, 'public');
+
+            // Obtener la URL
+            $url = Storage::disk('s3')->url($path);
+
+            return response()->json([
+                'url' => $url,
+            ]);
         }
 
-        $file = $request->file($field_name);
-        $extension = $file->extension();
-
-        if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
-            throw new \Exception("Solo se acepta png, jpg, jpeg");
-        }
-
-        $nombre = \Str::uuid() . '.' . $extension;
-
-        Storage::disk('bucket')->putFileAs($folder, $file, $nombre, 'public');
-
-        return Storage::disk('bucket')->url("$folder/$nombre");
+        return response()->json(['error' => 'No se subió ninguna imagen'], 400);
     }
     public static function saveFileFromBase64(String $base64File, String $folder)
     {
