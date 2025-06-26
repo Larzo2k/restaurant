@@ -109,7 +109,7 @@ class Helpers
 
             // Obtener la URL
             $url = Storage::disk('s3')->url($path);
-
+            dd($url);
             return response()->json([
                 'url' => $url,
             ]);
