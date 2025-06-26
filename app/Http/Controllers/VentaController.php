@@ -15,6 +15,7 @@ use App\Utils\DeloWass;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class VentaController extends Controller
 {
@@ -65,6 +66,7 @@ class VentaController extends Controller
         }
     }
     public function prueba(){
+        Log::info('prueba de envios de jobs de prueba');
         SendNotificationPruebaJob::dispatch();
         // $message = "hola, esta es una prueb para enviar mensajes sin jobs";
         // DeloWass::enviarTexto('+59163448258', $message);
