@@ -37,6 +37,28 @@ class Helpers
 
     public static function guardarImagen(Request $request, $folder, $field_name)
     {
+        // if (!$request->hasFile($field_name)) {
+        //     return ''; // Si no hay archivo, retornar vacío
+        // }
+
+        // $file = $request->file($field_name);
+        // $extension = $file->extension();
+
+        // // Verificar que el archivo tenga una extensión permitida
+        // if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
+        //     throw new Exception("Solo es aceptable png, jpg, jpeg");
+        // }
+
+        // // Generar un nombre único para el archivo
+        // $nombre = Str::uuid() . '.' . $extension;
+
+        // // Guardar el archivo en la carpeta especificada dentro del disco público
+        // Storage::disk('public')->putFileAs($folder, $file, $nombre);
+
+        // // Crear la ruta relativa para el archivo guardado
+        // $path = "storage/$folder/" . $nombre;
+
+        // return $path;
         if (!$request->hasFile($field_name)) {
             return ''; // Si no hay archivo, retornar vacío
         }
@@ -44,21 +66,19 @@ class Helpers
         $file = $request->file($field_name);
         $extension = $file->extension();
 
-        // Verificar que el archivo tenga una extensión permitida
         if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
-            throw new Exception("Solo es aceptable png, jpg, jpeg");
+            throw new \Exception("Solo es aceptable png, jpg, jpeg");
         }
 
-        // Generar un nombre único para el archivo
         $nombre = Str::uuid() . '.' . $extension;
 
-        // Guardar el archivo en la carpeta especificada dentro del disco público
-        Storage::disk('public')->putFileAs($folder, $file, $nombre);
+        // Usamos el disco 'bucket' que está configurado con S3 o Laravel Cloud Storage
+        Storage::disk('bucket')->putFileAs($folder, $file, $nombre, 'public');
 
-        // Crear la ruta relativa para el archivo guardado
-        $path = "storage/$folder/" . $nombre;
+        // Puedes construir la URL completa si es un bucket público
+        $url = Storage::disk('bucket')->url("$folder/$nombre");
 
-        return $path;
+        return $url;
     }
     public static function saveFileFromBase64(String $base64File, String $folder)
     {
