@@ -27,7 +27,7 @@
                         <tr class="odd">
                             <td class="col-1">{{ $loop->iteration }}</td>
                             <td class="col-1">
-                                <img src="{{asset($cliente->image)}}" height="40" alt="">
+                                <img src="{{$cliente->image}}" height="40" alt="">
                             </td>
                             <td>{{ $cliente->name }}</td>
                             <td>{{ $cliente->address }}</td>
