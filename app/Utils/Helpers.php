@@ -104,13 +104,13 @@ class Helpers
         if ($request->hasFile('imagen')) {
             // $path = $request->file('imagen')->storeP('imagenes', 's3');
             $path = $request->file('imagen')->storePublicly('imagenes', 's3');
-            dd($path);
             // Hacerla pública (si quieres)
-            // Storage::disk('s3')->setVisibility($path, 'public');
+            Storage::disk('s3')->setVisibility($path, 'public');
 
             // Obtener la URL
             // $url = Storage::disk('s3')->url($path);
             $url = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $path;
+            dd($url);
             return $url;
             // return response()->json([
             //     'url' => $url,
