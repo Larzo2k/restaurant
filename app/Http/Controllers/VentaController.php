@@ -66,8 +66,8 @@ class VentaController extends Controller
     }
     public function prueba(){
         SendNotificationPruebaJob::dispatch();
-        $message = "hola, esta es una prueb para enviar mensajes sin jobs";
-        DeloWass::enviarTexto('+59163448258', $message);
+        // $message = "hola, esta es una prueb para enviar mensajes sin jobs";
+        // DeloWass::enviarTexto('+59163448258', $message);
     }
     public function prueba2(){
         try{

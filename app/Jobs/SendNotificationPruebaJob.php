@@ -26,7 +26,7 @@ class SendNotificationPruebaJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $message = "hola, esta es una prueb para enviar mensajes jobs";
+        $message = "hola, esta es una prueba para enviar mensajes jobs";
         DeloWass::enviarTexto('+59170906491', $message);
     }
 }
