@@ -55,48 +55,39 @@ class GeneratePdfVentaDownloadJob implements ShouldQueue
     public function handle(): void
     {
         $venta = Venta::findOrFail($this->venta_id);
-        $data = [
-            'venta' => $venta,
-        ];
+        $data = ['venta' => $venta];
 
-        // Configuración de fechas y nombres
+        // Configuración de fechas
         $añoActual = date('Y');
         setlocale(LC_TIME, 'es_ES.UTF-8');
-        $fecha = Carbon::createFromDate(date('Y'), date('m'), 1);
-        $nombreMes = $fecha->translatedFormat('F');
+        $nombreMes = Carbon::now()->translatedFormat('F');
 
         try {
             // Generar el PDF
             $pdf = PDF::loadView('admin.venta.pdf', $data);
 
-            // Crear estructura de carpetas y nombre de archivo
-            $pdfFileName = 'ventas/' . $añoActual . '/' . $nombreMes . '/' . Str::uuid() . '.pdf';
+            // Ruta en S3 (sin 'public/' y usando estructura limpia)
+            $pdfPath = 'ventas/' . $añoActual . '/' . $nombreMes . '/' . Str::uuid() . '.pdf';
 
-            // Guardar el PDF en S3 (Cloudflare R2)
-            Storage::disk('s3')->put(
-                $pdfFileName,
-                $pdf->output(),
-                [
-                    'visibility' => 'private', // O 'public' si quieres que sea accesible públicamente
-                    'ContentType' => 'application/pdf'
-                ]
-            );
-
-            // Obtener la URL del archivo (puedes usar signed URL si es privado)
-            $pdfUrl = Storage::disk('s3')->url($pdfFileName);
-
-            // Si el archivo es privado, genera una URL temporal
-            // $pdfUrl = Storage::disk('s3')->temporaryUrl($pdfFileName, now()->addHours(24));
-
-            // Actualizar la venta con la URL del PDF
-            $venta->update([
-                'url_pdf' => $pdfUrl
+            // Guardar en S3 con visibilidad pública
+            Storage::disk('s3')->put($pdfPath, $pdf->output(), [
+                'visibility' => 'public',
+                'ContentType' => 'application/pdf'
             ]);
 
-            Log::info("PDF guardado en S3: {$pdfUrl}");
+            // Generar URL correcta (Cloudflare R2 específico)
+            $pdfUrl = rtrim(env('AWS_URL'), '/') . '/' . ltrim($pdfPath, '/');
+
+            // Alternativa usando el método url() si está bien configurado
+            // $pdfUrl = Storage::disk('s3')->url($pdfPath);
+
+            // Actualizar la venta
+            $venta->update(['url_pdf' => $pdfUrl]);
+
+            Log::info("PDF guardado correctamente en: {$pdfUrl}");
         } catch (\Exception $e) {
-            Log::error("Error al generar y guardar PDF para venta {$this->venta_id}: " . $e->getMessage());
-            throw $e; // O maneja el error según tus necesidades
+            Log::error("Error al guardar PDF: " . $e->getMessage());
+            throw $e;
         }
     }
 }
