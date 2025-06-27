@@ -49,7 +49,7 @@ class SenNotificationClient implements ShouldQueue
             $cliente->cod.$cliente->phone, 
             $message, 
             // "https://refactoring.guru/files/design-patterns-es-demo.pdf",
-            env("APP_URL").$venta->url_pdf, 
+            $venta->url_pdf, 
             "Comprobante de venta"
         );
         // Waziper::enviarArchivoEnMasivo(
