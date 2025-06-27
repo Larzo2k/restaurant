@@ -148,7 +148,7 @@
 
             </div>
 
-            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
+            {{-- <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
                 style="background-image: url(https://preview.keenthemes.com/metronic8/demo1/assets/media/misc/auth-bg.png)">
                 <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
                     <a href="{{ route('login') }}" class="mb-0 mb-lg-12">
@@ -183,6 +183,38 @@
 
                         <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the interviewee</a>
                         and their <br /> work following this is a transcript of the interview.
+                    </div>
+                </div>
+            </div> --}}
+            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
+                style="background-image: url(https://preview.keenthemes.com/metronic8/demo1/assets/media/misc/auth-bg.png)">
+                <div class="d-flex flex-column flex-center py-7 py-lg-15 px-5 px-md-15 w-100">
+                    <a href="#" class="mb-0 mb-lg-12">
+                        @if ($configuracion->logotipo !== '')
+                            <img alt="Logo" src="{{ $configuracion->logotipo }}" class="h-60px h-lg-75px" />
+                        @else
+                            <img alt="Logo" src="/metronic8/demo1/assets/media/logos/custom-1.png"
+                                class="h-60px h-lg-75px" />
+                        @endif
+                    </a>
+
+                    @if ($configuracion->image_login !== '')
+                        <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
+                            style="margin-top: -30px" src="{{ $configuracion->image_login }}" alt="" />
+                    @else
+                        <img class="d-none d-lg-block mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20"
+                            style="margin-top: -30px"
+                            src="	https://preview.keenthemes.com/metronic8/demo1/assets/media/misc/auth-screens.png"
+                            alt="" />
+                    @endif
+
+                    <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7"
+                        style="margin-top: -30px">
+                        {{ $configuracion->name }}
+                    </h1>
+
+                    <div class="d-none d-lg-block text-white fs-base text-center">
+                        Tu lugar de confianza.
                     </div>
                 </div>
             </div>
