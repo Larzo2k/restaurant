@@ -177,16 +177,50 @@ class Helpers
             throw $e; // Relanzar la excepción para manejo en el controlador
         }
     }
-    public static function saveFileFromBase64(String $base64File, String $folder)
-    {
-        $dataInfo = explode(";base64,", $base64File);
-        $dataExt = str_replace('data:image/', '', $dataInfo[0]);
-        $dataFile = str_replace(' ', '+', $dataInfo[1]);
-        $image = base64_decode($dataFile);
+    // public static function saveFileFromBase64(String $base64File, String $folder)
+    // {
+    //     $dataInfo = explode(";base64,", $base64File);
+    //     $dataExt = str_replace('data:image/', '', $dataInfo[0]);
+    //     $dataFile = str_replace(' ', '+', $dataInfo[1]);
+    //     $image = base64_decode($dataFile);
 
-        $nombre = $folder . '/' . uniqid() . '.' . $dataExt;
-        Storage::disk('public')->put($nombre, $image);
-        $path = "storage/" . $nombre;
-        return $path;
+    //     $nombre = $folder . '/' . uniqid() . '.' . $dataExt;
+    //     Storage::disk('public')->put($nombre, $image);
+    //     $path = "storage/" . $nombre;
+    //     return $path;
+    // }
+    public static function saveFileFromBase64(string $base64File, string $folder): string
+    {
+        try {
+            // Validar que el string base64 tenga el formato correcto
+            if (!preg_match('/^data:image\/(\w+);base64,/', $base64File, $matches)) {
+                throw new \InvalidArgumentException('Formato base64 inválido. Debe comenzar con "data:image/[extensión];base64,"');
+            }
+
+            // Extraer la extensión y los datos binarios
+            $extension = $matches[1];
+            $base64Data = substr($base64File, strpos($base64File, ',') + 1);
+            $imageData = base64_decode($base64Data);
+
+            // Validar que la decodificación fue exitosa
+            if ($imageData === false) {
+                throw new \RuntimeException('Error al decodificar el string base64');
+            }
+
+            // Generar nombre único y seguro para el archivo
+            $fileName = $folder . '/' . Str::uuid() . '.' . $extension;
+
+            // Guardar en Cloudflare R2 (S3) con visibilidad pública
+            Storage::disk('s3')->put($fileName, $imageData, [
+                'visibility' => 'public',
+                'ContentType' => 'image/' . $extension
+            ]);
+
+            // Obtener la URL pública del archivo
+            return Storage::disk('s3')->url($fileName);
+        } catch (\Exception $e) {
+            \Log::error('Error al guardar archivo base64: ' . $e->getMessage());
+            throw $e; // Puedes personalizar el manejo de errores según tus necesidades
+        }
     }
 }
