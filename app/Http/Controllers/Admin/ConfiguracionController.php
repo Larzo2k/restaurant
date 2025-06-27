@@ -21,11 +21,25 @@ class ConfiguracionController extends Controller
     public function update(Request $request)
     {
         try {
-        //guardar imagen
-            $logotipo = Helpers::guardarImagen($request, 'configuraciones', 'avatar');
-            $favicon = Helpers::guardarImagen($request, 'configuraciones', 'favicon');
-            $image = Helpers::guardarImagen($request, 'configuraciones', 'imagen_login');
-            Configuration::updateConfiguration($request->name, $request->telefono, $request->cod_pais, $request->access_token_wsp, $image, $logotipo, $favicon);
+            // Subir todas las imágenes
+            $uploadedImages = Helpers::guardarImagenConfigurations($request);
+
+            // Actualizar configuración
+            Configuration::updateConfiguration(
+                $request->name,
+                $request->telefono,
+                $request->cod_pais,
+                $request->access_token_wsp,
+                $uploadedImages['imagen_login'],
+                $uploadedImages['avatar'],
+                $uploadedImages['favicon']
+            );
+        //     dd($request->all());
+        // //guardar imagen
+        //     $logotipo = Helpers::guardarImagenConfigurations($request->avatar, 'configuraciones', 'avatar');
+        //     $favicon = Helpers::guardarImagenConfigurations($request->favicon, 'configuraciones', 'favicon');
+        //     $image = Helpers::guardarImagenConfigurations($request->imagen_login, 'configuraciones', 'imagen_login');
+        //     Configuration::updateConfiguration($request->name, $request->telefono, $request->cod_pais, $request->access_token_wsp, $image, $logotipo, $favicon);
             return response()->json([
                 'codigo' => 0,
                 'data' => Configuration::first(),

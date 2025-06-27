@@ -100,7 +100,7 @@ class Helpers
 
     //     return response()->json(['error' => 'No se subió ninguna imagen'], 400);
     // }
-    
+
     public static function guardarImagen(Request $request)
     {
         $request->validate([
@@ -131,6 +131,51 @@ class Helpers
         }
 
         return response()->json(['error' => 'No se subió ninguna imagen'], 400);
+    }
+    public static function guardarImagenConfigurations(Request $request)
+    {
+        $request->validate([
+            'avatar' => 'required|file|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'imagen_login' => 'required|file|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'favicon' => 'required|file|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);
+
+        try {
+            $uploadedImages = [];
+
+            // Procesar cada imagen
+            $imageTypes = [
+                'avatar' => 'configuraciones/avatar',
+                'imagen_login' => 'configuraciones/login',
+                'favicon' => 'configuraciones/favicon'
+            ];
+
+            foreach ($imageTypes as $field => $folder) {
+                if ($request->hasFile($field)) {
+                    $file = $request->file($field);
+                    $extension = $file->extension();
+
+                    // Generar nombre único manteniendo la estructura de carpetas
+                    $fileName = $folder . '/' . uniqid() . '.' . $extension;
+
+                    // Subir con visibilidad pública
+                    Storage::disk('s3')->put($fileName, file_get_contents($file), 'public');
+
+                    // Guardar la URL
+                    $uploadedImages[$field] = Storage::disk('s3')->url($fileName);
+                }
+            }
+
+            // Verificar que se subieron todas las imágenes requeridas
+            if (count($uploadedImages) !== count($imageTypes)) {
+                throw new \Exception('No se pudieron subir todas las imágenes requeridas');
+            }
+
+            return $uploadedImages;
+        } catch (\Exception $e) {
+            \Log::error('Error al subir imágenes de configuración: ' . $e->getMessage());
+            throw $e; // Relanzar la excepción para manejo en el controlador
+        }
     }
     public static function saveFileFromBase64(String $base64File, String $folder)
     {
