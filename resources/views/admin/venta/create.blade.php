@@ -12,11 +12,11 @@
                         <div class="row">
                             <div class="col-12 col-sm-4">
                                 <div class="row">
-                                    <label class="form-label">Buscar medicamento?</label>
+                                    <label class="form-label">Buscar producto?</label>
                                 </div>
                                 <div class="input-group mb-3">
                                     <input class="form-control" id="medicamento" name="medicamento" type="text"
-                                        placeholder="Ingrese el nombre del medicamento" autofocus>
+                                        placeholder="Ingrese el nombre del producto" autofocus>
                                     <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#crearModalCondominio"><i class="fas fa-list-ol"></i></button>
                                 </div>
