@@ -1,5 +1,6 @@
-<div class="modal fade" id="modalQr" tabindex="-1" aria-labelledby="exampleModalEditarDirectivo"
-    aria-hidden="true">
+<div class="modal fade" id="modalQr" tabindex="-1" aria-hidden="true"
+data-bs-backdrop="static"
+data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
