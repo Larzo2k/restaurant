@@ -22,7 +22,7 @@ class WebhookVeripagosController extends Controller
             $movimientoId = $request['movimiento_id'];
             $total = $request['monto'];
             $paymentInstance = isset($request->data[0]) ? $request->data[0] : null;
-            $payment = Payment::with('pedido')->find($paymentInstance);
+            $payment = Payment::with('pedido')->where('movement_id', $movimientoId)->first();
             $remitente = isset($request->remitente['nombre']) ? $request->remitente['nombre'] : null;
 
             if ($payment->is_pago == Payment::PAGO_NO_VERIFICADO) {
