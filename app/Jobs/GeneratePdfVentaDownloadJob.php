@@ -82,6 +82,7 @@ class GeneratePdfVentaDownloadJob implements ShouldQueue
             // $pdfUrl = Storage::disk('s3')->url($pdfPath);
 
             // Actualizar la venta
+            Log::info('url_pdf' . $pdfUrl);
             $venta->update(['url_pdf' => $pdfUrl]);
 
             Log::info("PDF guardado correctamente en: {$pdfUrl}");
