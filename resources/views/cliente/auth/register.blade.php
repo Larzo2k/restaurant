@@ -6,7 +6,7 @@
     {{-- @if ($configuracion->nombre !== '')
         <title>{{ $configuracion->nombre }}</title>
     @else --}}
-        <title>Sistema condominio</title>
+        <title>Sistema restaurante</title>
     {{-- @endif --}}
 
     <meta charset="utf-8" />
