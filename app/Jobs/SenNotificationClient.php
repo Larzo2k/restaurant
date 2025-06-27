@@ -48,8 +48,8 @@ class SenNotificationClient implements ShouldQueue
         DeloWass::enviarArchivo(
             $cliente->cod.$cliente->phone, 
             $message, 
-            "https://refactoring.guru/files/design-patterns-es-demo.pdf",
-            // env("APP_URL").$venta->url_pdf, 
+            // "https://refactoring.guru/files/design-patterns-es-demo.pdf",
+            env("APP_URL").$venta->url_pdf, 
             "Comprobante de venta"
         );
         // Waziper::enviarArchivoEnMasivo(
