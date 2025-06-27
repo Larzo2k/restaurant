@@ -46,7 +46,7 @@ class SendNotificationCustomerJob implements ShouldQueue
 💵 Total pagado: *{$pedido->total} Bs*
 
 ✅ El pedido fue registrado con éxito y está listo para ser procesado.";
-        $number = $configuration->code . $configuration->phone;
+        $number = '59165900014';
         DeloWass::enviarTexto($number, $message);
     }
 }
