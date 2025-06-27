@@ -36,9 +36,12 @@
                               <span><span class="badge bg-danger rounded-pill px-3 py-2">NO PAGADO</span>
                           @endswitch</td>
                           <td class="text-end">
-                                <a onclick="showPedido(`{{$item->id}}`" class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="tooltip" title="" data-kt-action="product_remove" data-bs-original-title="Dar de baja">
-                                  <i class="fa-solid fa-trash"></i>
-                                </a>
+                            <a href="{{ route('admin.pedido.pdf', $item->id) }}"
+                                class="btn btn-icon btn-flex btn-active-light-primary w-30px h-30px me-3"
+                                data-bs-toggle="tooltip" title="" data-kt-action="product_remove"
+                                data-bs-original-title="Ver pdf">
+                                  <i class="fa-solid fa-file-pdf"></i>
+                              </a>
                           </td>
                       </tr>
                   @empty
