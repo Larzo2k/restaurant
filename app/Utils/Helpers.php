@@ -35,51 +35,31 @@ class Helpers
         return $path;
     }
 
-    // public static function guardarImagen(Request $request, $folder, $field_name)
-    // {
-    //     // if (!$request->hasFile($field_name)) {
-    //     //     return ''; // Si no hay archivo, retornar vacío
-    //     // }
+    public static function guardarImagen(Request $request, $folder, $field_name)
+    {
+        if (!$request->hasFile($field_name)) {
+            return ''; // Si no hay archivo, retornar vacío
+        }
 
-    //     // $file = $request->file($field_name);
-    //     // $extension = $file->extension();
+        $file = $request->file($field_name);
+        $extension = $file->extension();
 
-    //     // // Verificar que el archivo tenga una extensión permitida
-    //     // if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
-    //     //     throw new Exception("Solo es aceptable png, jpg, jpeg");
-    //     // }
+        // Verificar que el archivo tenga una extensión permitida
+        if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
+            throw new Exception("Solo es aceptable png, jpg, jpeg");
+        }
 
-    //     // // Generar un nombre único para el archivo
-    //     // $nombre = Str::uuid() . '.' . $extension;
+        // Generar un nombre único para el archivo
+        $nombre = Str::uuid() . '.' . $extension;
 
-    //     // // Guardar el archivo en la carpeta especificada dentro del disco público
-    //     // Storage::disk('public')->putFileAs($folder, $file, $nombre);
+        // Guardar el archivo en la carpeta especificada dentro del disco público
+        Storage::disk('public')->putFileAs($folder, $file, $nombre);
 
-    //     // // Crear la ruta relativa para el archivo guardado
-    //     // $path = "storage/$folder/" . $nombre;
+        // Crear la ruta relativa para el archivo guardado
+        $path = "storage/$folder/" . $nombre;
 
-    //     // return $path;
-    //     if (!$request->hasFile($field_name)) {
-    //         return ''; // Si no hay archivo, retornar vacío
-    //     }
-
-    //     $file = $request->file($field_name);
-    //     $extension = $file->extension();
-
-    //     if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
-    //         throw new \Exception("Solo es aceptable png, jpg, jpeg");
-    //     }
-
-    //     $nombre = Str::uuid() . '.' . $extension;
-
-    //     // Usamos el disco 'bucket' que está configurado con S3 o Laravel Cloud Storage
-    //     Storage::disk('bucket')->putFileAs($folder, $file, $nombre, 'public');
-
-    //     // Puedes construir la URL completa si es un bucket público
-    //     $url = Storage::disk('bucket')->url("$folder/$nombre");
-
-    //     return $url;
-    // }
+        return $path;
+    }
     // public static function guardarImagen(Request $request, $folder, $field_name)
     // {
     //     if (!$request->hasFile($field_name)) {
@@ -99,26 +79,26 @@ class Helpers
 
     //     return Storage::disk('bucket')->url("$folder/$nombre");
     // }
-    public static function guardarImagen(Request $request)
-    {
-        if ($request->hasFile('imagen')) {
-            // $path = $request->file('imagen')->storeP('imagenes', 's3');
-            $path = $request->file('imagen')->storePublicly('imagenes', 's3');
-            // Hacerla pública (si quieres)
-            Storage::disk('s3')->setVisibility($path, 'public');
+    // public static function guardarImagen(Request $request)
+    // {
+    //     if ($request->hasFile('imagen')) {
+    //         // $path = $request->file('imagen')->storeP('imagenes', 's3');
+    //         $path = $request->file('imagen')->storePublicly('imagenes', 's3');
+    //         // Hacerla pública (si quieres)
+    //         Storage::disk('s3')->setVisibility($path, 'public');
 
-            // Obtener la URL
-            // $url = Storage::disk('s3')->url($path);
-            $url = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $path;
-            dd($url);
-            return $url;
-            // return response()->json([
-            //     'url' => $url,
-            // ]);
-        }
+    //         // Obtener la URL
+    //         // $url = Storage::disk('s3')->url($path);
+    //         $url = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $path;
+    //         // dd($url);
+    //         return $url;
+    //         // return response()->json([
+    //         //     'url' => $url,
+    //         // ]);
+    //     }
 
-        return response()->json(['error' => 'No se subió ninguna imagen'], 400);
-    }
+    //     return response()->json(['error' => 'No se subió ninguna imagen'], 400);
+    // }
     public static function saveFileFromBase64(String $base64File, String $folder)
     {
         $dataInfo = explode(";base64,", $base64File);
