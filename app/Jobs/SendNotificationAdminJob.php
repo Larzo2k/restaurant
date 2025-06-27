@@ -44,7 +44,7 @@ Gracias por confiar en nosotros. 📦
 📄 Nro. de pedido: *{$pedido->nro_recibo}*
 
 Nos comunicaremos pronto para más detalles";
-        $number = $pedido->customer->code . $pedido->customer->phone;
+        $number = $pedido->customer->cod . $pedido->customer->phone;
         //$number = "+59170906491";
         DeloWass::enviarTexto($number, $message);
     }
