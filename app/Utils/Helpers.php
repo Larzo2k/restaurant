@@ -35,31 +35,31 @@ class Helpers
         return $path;
     }
 
-    public static function guardarImagen(Request $request, $folder, $field_name)
-    {
-        if (!$request->hasFile($field_name)) {
-            return ''; // Si no hay archivo, retornar vacío
-        }
+    // public static function guardarImagen(Request $request, $folder, $field_name)
+    // {
+    //     if (!$request->hasFile($field_name)) {
+    //         return ''; // Si no hay archivo, retornar vacío
+    //     }
 
-        $file = $request->file($field_name);
-        $extension = $file->extension();
+    //     $file = $request->file($field_name);
+    //     $extension = $file->extension();
 
-        // Verificar que el archivo tenga una extensión permitida
-        if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
-            throw new Exception("Solo es aceptable png, jpg, jpeg");
-        }
+    //     // Verificar que el archivo tenga una extensión permitida
+    //     if (!in_array($extension, ['png', 'jpg', 'jpeg'])) {
+    //         throw new Exception("Solo es aceptable png, jpg, jpeg");
+    //     }
 
-        // Generar un nombre único para el archivo
-        $nombre = Str::uuid() . '.' . $extension;
+    //     // Generar un nombre único para el archivo
+    //     $nombre = Str::uuid() . '.' . $extension;
 
-        // Guardar el archivo en la carpeta especificada dentro del disco público
-        Storage::disk('public')->putFileAs($folder, $file, $nombre);
+    //     // Guardar el archivo en la carpeta especificada dentro del disco público
+    //     Storage::disk('public')->putFileAs($folder, $file, $nombre);
 
-        // Crear la ruta relativa para el archivo guardado
-        $path = "storage/$folder/" . $nombre;
+    //     // Crear la ruta relativa para el archivo guardado
+    //     $path = "storage/$folder/" . $nombre;
 
-        return $path;
-    }
+    //     return $path;
+    // }
     // public static function guardarImagen(Request $request, $folder, $field_name)
     // {
     //     if (!$request->hasFile($field_name)) {
@@ -79,6 +79,7 @@ class Helpers
 
     //     return Storage::disk('bucket')->url("$folder/$nombre");
     // }
+
     // public static function guardarImagen(Request $request)
     // {
     //     if ($request->hasFile('imagen')) {
@@ -90,7 +91,7 @@ class Helpers
     //         // Obtener la URL
     //         // $url = Storage::disk('s3')->url($path);
     //         $url = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $path;
-    //         // dd($url);
+    //         dd($url);
     //         return $url;
     //         // return response()->json([
     //         //     'url' => $url,
@@ -99,6 +100,38 @@ class Helpers
 
     //     return response()->json(['error' => 'No se subió ninguna imagen'], 400);
     // }
+    
+    public static function guardarImagen(Request $request)
+    {
+        $request->validate([
+            'imagen' => 'required|file|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);
+
+        try {
+            if ($request->hasFile('imagen')) {
+                $file = $request->file('imagen');
+
+                // Genera un nombre único
+                $fileName = 'imagenes/' . uniqid() . '.' . $file->extension();
+
+                // Sube el archivo con visibilidad pública
+                Storage::disk('s3')->put($fileName, file_get_contents($file), 'public');
+
+                // Obtén la URL correctamente formada
+                $url = Storage::disk('s3')->url($fileName);
+
+                return $url;
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error al subir imagen: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Error al subir la imagen',
+                'details' => config('app.debug') ? $e->getMessage() : null,
+            ], 500);
+        }
+
+        return response()->json(['error' => 'No se subió ninguna imagen'], 400);
+    }
     public static function saveFileFromBase64(String $base64File, String $folder)
     {
         $dataInfo = explode(";base64,", $base64File);
